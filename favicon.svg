@@ -1,0 +1,48 @@
+<svg width="1024" height="1024" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="1024" height="1024" rx="200" fill="#0d0b08"/>
+
+  <!-- Outer glow -->
+  <radialGradient id="outerGlow" cx="50%" cy="40%" r="45%">
+    <stop offset="0%" stop-color="#c9a227" stop-opacity="0.22"/>
+    <stop offset="100%" stop-color="#c9a227" stop-opacity="0"/>
+  </radialGradient>
+  <rect width="1024" height="1024" rx="200" fill="url(#outerGlow)"/>
+
+  <!-- Lamp group — scaled from viewBox 0 0 22 28, centered in 1024x1024 -->
+  <!-- Scale: 28px → 620px = factor 22.14 | 22px → 487px  -->
+  <!-- Offset: x=(1024-487)/2=268  y=(1024-620)/2=202 -->
+  <g transform="translate(268,190) scale(22.14)">
+
+    <!-- Flame halo -->
+    <ellipse cx="11" cy="7" rx="5" ry="6" fill="#c9a227" opacity="0.15"/>
+
+    <!-- Main flame -->
+    <path d="M11 1C9.8 4 7.5 5.5 7.5 8.2a3.5 3.5 0 0 0 7 0C14.5 5.5 12.2 4 11 1z" fill="#c9a227"/>
+
+    <!-- Inner flame highlight -->
+    <path d="M11 4.5C10.4 6.2 9.2 7.2 9.2 8.4a1.8 1.8 0 0 0 3.6 0C12.8 7.2 11.6 6.2 11 4.5z" fill="#fde68a" opacity="0.9"/>
+
+    <!-- Wick -->
+    <line x1="11" y1="11.7" x2="11" y2="13.2" stroke="#c9a227" stroke-width="1.4" stroke-linecap="round"/>
+
+    <!-- Lamp body -->
+    <path d="M7 13.5C6.2 13.5 5.5 14.2 5.5 15L5.5 18.5C5.5 19.8 6.5 20.5 8 20.5L14 20.5C15.5 20.5 16.5 19.8 16.5 18.5L16.5 15C16.5 14.2 15.8 13.5 15 13.5Z"
+          fill="none" stroke="#c9a227" stroke-width="1.25" stroke-linejoin="round"/>
+
+    <!-- Right handle -->
+    <path d="M15.5 14.5L19 13" stroke="#c9a227" stroke-width="1.2" stroke-linecap="round"/>
+
+    <!-- Left handle -->
+    <path d="M6.5 15.5C4.5 15.5 3.5 16.5 3.5 17.5C3.5 18.8 4.8 19.5 6 19.5"
+          stroke="#c9a227" stroke-width="1.1" stroke-linecap="round" fill="none"/>
+
+    <!-- Stand -->
+    <line x1="11" y1="20.5" x2="11" y2="23" stroke="#c9a227" stroke-width="1.4" stroke-linecap="round"/>
+
+    <!-- Base -->
+    <path d="M7 23Q6.5 24.5 7.5 25L14.5 25Q15.5 24.5 15 23Z"
+          fill="none" stroke="#c9a227" stroke-width="1.2" stroke-linejoin="round"/>
+
+  </g>
+</svg>

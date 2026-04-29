@@ -1,0 +1,1763 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>LUMEN</title>
+<meta name="theme-color" content="#d4a843"/>
+<link rel="manifest" href="manifest.webmanifest"/>
+<link rel="icon" href="favicon.svg" type="image/svg+xml"><link rel="icon" type="image/png" sizes="32x32" href="icons/icon-32.png"><link rel="apple-touch-icon" sizes="180x180" href="icons/icon-180.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&family=Inter:wght@400;500&display=swap" rel="stylesheet"/>
+<script crossorigin src="vendor/react.js"></script>
+<script crossorigin src="vendor/react-dom.js"></script>
+<script src="vendor/babel.js"></script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html,body{height:100%;overflow:hidden;font-family:'Inter',sans-serif;transition:background 1.2s ease;background:#070502;}
+#root{width:100%;height:100%;position:relative;overflow:hidden;transform:translateZ(0);isolation:isolate;display:flex;flex-direction:column;}
+.app-shell{flex:1;width:100%;max-width:760px;margin:0 auto;position:relative;overflow:hidden;display:flex;flex-direction:column;}
+.tb-btn{width:42px;height:30px;display:flex;align-items:center;justify-content:center;background:transparent;border:none;cursor:pointer;color:rgba(189,168,138,0.65);transition:background 0.18s ease,color 0.18s ease;-webkit-app-region:no-drag;}
+.tb-btn:hover{background:rgba(201,162,39,0.15);color:#d4a843;}
+.tb-btn.tb-close:hover{background:#c25a3c;color:#fff;}
+input,button,textarea{outline:none;font-family:'Inter',sans-serif;}
+::-webkit-scrollbar{width:3px;background:transparent;}
+::-webkit-scrollbar-track{background:transparent;margin:20px 0;}
+::-webkit-scrollbar-thumb{background:linear-gradient(to bottom,transparent,rgba(201,162,39,0.35),rgba(201,162,39,0.6),rgba(201,162,39,0.35),transparent);border-radius:10px;}
+::-webkit-scrollbar-thumb:hover{background:linear-gradient(to bottom,transparent,rgba(201,162,39,0.5),rgba(201,162,39,0.85),rgba(201,162,39,0.5),transparent);}
+* {scrollbar-width:thin;scrollbar-color:rgba(201,162,39,0.4) transparent;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
+@keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
+@keyframes slideUp{from{transform:translateY(100%);}to{transform:translateY(0);}}
+@keyframes coinPop{0%{opacity:0;transform:translateY(0) scale(0.5);}40%{opacity:1;transform:translateY(-22px) scale(1.2);}100%{opacity:0;transform:translateY(-54px) scale(0.8);}}
+@keyframes particleFly0{0%{opacity:1;transform:translate(0,0);}100%{opacity:0;transform:translate(-20px,-40px) scale(0.2);}}
+@keyframes particleFly1{0%{opacity:1;transform:translate(0,0);}100%{opacity:0;transform:translate(8px,-46px) scale(0.2);}}
+@keyframes particleFly2{0%{opacity:1;transform:translate(0,0);}100%{opacity:0;transform:translate(22px,-36px) scale(0.2);}}
+@keyframes particleFly3{0%{opacity:1;transform:translate(0,0);}100%{opacity:0;transform:translate(-6px,-50px) scale(0.2);}}
+@keyframes flameDance{0%,100%{transform:scaleX(1) translateY(0);}33%{transform:scaleX(0.92) translateY(-1px);}66%{transform:scaleX(1.06) translateY(0.5px);}}
+@keyframes pulse{0%,100%{opacity:0.5;}50%{opacity:1;}}
+@keyframes glowPulse{0%,100%{opacity:0.4;}50%{opacity:0.95;}}
+@keyframes tabEnterRight{from{opacity:0;transform:translateX(30px);}to{opacity:1;transform:translateX(0);}}
+@keyframes tabEnterLeft{from{opacity:0;transform:translateX(-30px);}to{opacity:1;transform:translateX(0);}}
+@keyframes staggerFadeUp{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:translateY(0);}}
+@keyframes navIndicator{from{width:0;opacity:0;}to{width:20px;opacity:1;}}
+@keyframes habitCheck{0%{transform:scale(1);}35%{transform:scale(1.38);}65%{transform:scale(0.88);}100%{transform:scale(1);}}
+@keyframes ripple{0%{transform:scale(0);opacity:0.45;}100%{transform:scale(3.5);opacity:0;}}
+@keyframes shimmerGold{0%{background-position:-200% 0;}100%{background-position:200% 0;}}
+@keyframes rankBadge{0%{transform:scale(0.7);opacity:0;}60%{transform:scale(1.1);}100%{transform:scale(1);opacity:1;}}
+@keyframes pomodoroAlert{0%,100%{transform:scale(1);}50%{transform:scale(1.03);}}
+@keyframes onboardReveal{from{opacity:0;transform:translateY(30px);}to{opacity:1;transform:translateY(0);}}
+@keyframes ambientPulse{0%,100%{opacity:0.55;}50%{opacity:1;}}
+@keyframes softFloat{0%,100%{transform:translate(0,0) rotate(0deg);}33%{transform:translate(-2px,-3px) rotate(-1deg);}66%{transform:translate(2px,1px) rotate(1deg);}}
+@keyframes gentleGlow{0%,100%{filter:drop-shadow(0 0 0 transparent);}50%{filter:drop-shadow(0 0 6px rgba(201,162,39,0.45));}}
+@keyframes numberPulse{0%{transform:scale(1);}40%{transform:scale(1.16);}100%{transform:scale(1);}}
+@keyframes badgeGlow{0%,100%{box-shadow:0 0 0 0 rgba(201,162,39,0);}50%{box-shadow:0 0 14px 2px rgba(201,162,39,0.25);}}
+@keyframes flicker{0%,100%{opacity:1;}45%{opacity:0.92;}50%{opacity:0.85;}55%{opacity:0.95;}}
+.lift{transition:transform 0.3s cubic-bezier(0.22,1,0.36,1),box-shadow 0.3s ease,border-color 0.25s ease;}
+.lift:hover{transform:translateY(-2px);}
+.gear-hover{transition:transform 0.5s cubic-bezier(0.22,1,0.36,1),opacity 0.25s;}
+.gear-hover:hover{transform:rotate(60deg);opacity:0.85!important;}
+/* grain */
+#root::after{content:'';position:absolute;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");pointer-events:none;z-index:1000;opacity:0.55;}
+#root::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 0%,rgba(201,162,39,0.05) 0%,transparent 50%);pointer-events:none;z-index:1;animation:ambientPulse 7s ease-in-out infinite;}
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel">
+const {useState,useEffect,useRef,useCallback,useMemo} = React;
+
+// ── THEMES ────────────────────────────────────────────────
+const THEMES = {
+  night: { bg:'#0f0a05', surface:'#1c1409', border:'rgba(212,168,67,0.26)', gold:'#d4a843', goldDim:'#9a7a30', goldFaint:'rgba(212,168,67,0.10)', text:'#f0e6d0', textMid:'#bda88a', textDim:'#8a7a5c', red:'#c25a3c', green:'#6e9168', bodyBg:'#070502', label:'Ночь' },
+  dawn:  { bg:'#180e08', surface:'#251810', border:'rgba(226,152,80,0.28)', gold:'#e29850', goldDim:'#a87038', goldFaint:'rgba(226,152,80,0.12)', text:'#f8e2c2', textMid:'#cea888', textDim:'#9a7a58', red:'#cc5a3c', green:'#6c8e5a', bodyBg:'#0c0604', label:'Рассвет' },
+  day:   { bg:'#f5ead2', surface:'#ead9b4', border:'rgba(122,79,16,0.32)', gold:'#7a4f10', goldDim:'#9a6824', goldFaint:'rgba(122,79,16,0.09)', text:'#1c0f04', textMid:'#5a3a18', textDim:'#8c6a3c', red:'#7a2410', green:'#3a5a28', bodyBg:'#e8dcc0', label:'День' },
+  dusk:  { bg:'#0e0818', surface:'#1c1230', border:'rgba(212,168,104,0.28)', gold:'#d4a868', goldDim:'#9a7a4c', goldFaint:'rgba(212,168,104,0.10)', text:'#ecdfee', textMid:'#b8a0c8', textDim:'#8868a4', red:'#c85a5a', green:'#5c8a64', bodyBg:'#070310', label:'Закат' },
+};
+
+function getAutoTheme(){
+  const h=new Date().getHours();
+  if(h>=5&&h<9) return 'dawn';
+  if(h>=9&&h<18) return 'day';
+  if(h>=18&&h<21) return 'dusk';
+  return 'night';
+}
+
+// ── RANKS ─────────────────────────────────────────────────
+const RANKS=[
+  {min:0,    title:'Ищущий',    titleEn:'Seeker',       icon:'◇', verse:'«Ищите, и найдёте.»',                     ref:'МФ 7:7'},
+  {min:50,   title:'Ученик',    titleEn:'Disciple',     icon:'✦', verse:'«Кто следует за Мной, не будет ходить во тьме.»', ref:'ИН 8:12'},
+  {min:150,  title:'Послушник', titleEn:'Novice',       icon:'✧', verse:'«Верный в малом верен и во многом.»',      ref:'ЛК 16:10'},
+  {min:300,  title:'Верный',    titleEn:'Faithful',     icon:'⚜', verse:'«Будь верен до смерти, и дам тебе венец жизни.»', ref:'ОТК 2:10'},
+  {min:500,  title:'Слуга',     titleEn:'Servant',      icon:'✡', verse:'«Рука прилежных будет господствовать.»',   ref:'ПРИТЧ 12:24'},
+  {min:800,  title:'Страж',     titleEn:'Guardian',     icon:'☩', verse:'«Господь — страж твой; Господь — сень твоя.»', ref:'ПС 120:5'},
+  {min:1200, title:'Пастырь',   titleEn:'Shepherd',     icon:'🕊', verse:'«Господь — пастырь мой; я ни в чём не буду нуждаться.»', ref:'ПС 22:1'},
+  {min:2000, title:'Светоносец',titleEn:'Light-Bearer', icon:'☀', verse:'«Ты свет мира.»',                          ref:'МФ 5:14'},
+];
+function getRank(coins){return [...RANKS].reverse().find(r=>coins>=r.min)||RANKS[0];}
+
+// ── i18n ──────────────────────────────────────────────────
+const S={
+  ru:{tasks:'ДЕЛА',habits:'ПРИВЫЧКИ',chronicle:'ХРОНИКИ',rewards:'ОБЕТЫ',scripture:'ПИСАНИЕ',
+    newTask:'НОВОЕ ДЕЛО',addTask:'ЗАПИСАТЬ ДЕЛО',taskPlaceholder:'Что нужно сделать?',
+    editTask:'ИЗМЕНИТЬ ДЕЛО',difficulty:'СЛОЖНОСТЬ',easy:'Легко',medium:'Средне',hard:'Тяжело',
+    emptyTasks:'Свиток пуст. Запиши первое дело, чтобы зажечь свет.',
+    completed:'ИСПОЛНЕНО',streak:'СЕРИЯ',today:'СЕГОДНЯ',coins:'МОНЕТЫ',days:'дн.',
+    newHabit:'НОВАЯ ПРИВЫЧКА',addHabit:'ДОБАВИТЬ ПРИВЫЧКУ',habitPlaceholder:'Название привычки...',
+    editHabit:'ИЗМЕНИТЬ ПРИВЫЧКУ',
+    emptyHabits:'Нет привычек. Добавь первую — малый шаг к великому.',
+    progress:'Прогресс дня',settings:'НАСТРОЙКИ',language:'ЯЗЫК',
+    exportData:'Экспорт',importData:'Импорт',exportBtn:'Скачать backup.json',
+    importBtn:'Загрузить .json',resetBtn:'Сбросить всё',
+    resetConfirm:'Точно сбросить все данные?',importSuccess:'Данные загружены!',importError:'Неверный формат',
+    focusMin:'мин. фокуса',chronicle:'ХРОНИКИ',
+    prayerTitle:'МОЛИТВЕННЫЙ ЖУРНАЛ',prayerPlaceholder:'Запиши благодарность, покаяние или переживания сердца... Это исчезнет завтра.',
+    prayerSave:'ВОЗНЕСТИ',prayerClear:'Очистить',prayerDone:'Записано сегодня',
+    prayerVerse:'«Молитесь непрестанно.»',prayerRef:'1 ФЕСС 5:17',
+    themeAuto:'Авто',themeManual:'Вручную',theme:'ТЕМА',
+    recurring:'Повторяется',priority:'Приоритет',
+    weekDays:['Пн','Вт','Ср','Чт','Пт','Сб','Вс'],
+    pomoDone:'25 минут позади — отдохни!',pomoVerse:'«Будьте тихи и познайте, что Я Бог.»',pomoRef:'ПС 45:11',
+    rankLabel:'ЧИН',
+    sundayTitle:'ВОСКРЕСНЫЙ ОБЗОР',sundaySubtitle:'Минута тишины над прошедшей неделей',
+    sundayVerse:'«И увидел Бог всё, что Он создал, и вот, хорошо весьма.»',sundayRef:'БЫТ 1:31',
+    sundayWeek:'НЕДЕЛЯ',sundayTasksDone:'Дел исполнено',sundayHabitsKept:'Привычек удержано',
+    sundayCoinsEarned:'Монет собрано',sundayPrayerDays:'Дней молитвы',sundayFocusMin:'Минут фокуса',
+    sundayReflectLabel:'Что я вынес из этой недели',
+    sundayReflectPlaceholder:'Где видел свет? Где спотыкнулся? О чём благодарю...',
+    sundayClose:'ЗАКРЫТЬ',sundaySave:'СОХРАНИТЬ',sundayLater:'Позже',
+    sundayHistoryTitle:'ПРОШЕДШИЕ ОБЗОРЫ',
+    support:'Поддержать автора',supportTip:'Чаевые',supportBoosty:'Boosty',
+  },
+  en:{tasks:'TASKS',habits:'HABITS',chronicle:'STATS',rewards:'REWARDS',scripture:'VERSES',
+    newTask:'NEW TASK',addTask:'ADD TASK',taskPlaceholder:'What needs to be done?',
+    editTask:'EDIT TASK',difficulty:'DIFFICULTY',easy:'Easy',medium:'Medium',hard:'Hard',
+    emptyTasks:'The scroll is empty. Write your first task to light the flame.',
+    completed:'COMPLETED',streak:'STREAK',today:'TODAY',coins:'COINS',days:'d.',
+    newHabit:'NEW HABIT',addHabit:'ADD HABIT',habitPlaceholder:'Habit name...',
+    editHabit:'EDIT HABIT',
+    emptyHabits:'No habits yet. Add the first — a small step toward the great.',
+    progress:'Day progress',settings:'SETTINGS',language:'LANGUAGE',
+    exportData:'Export',importData:'Import',exportBtn:'Download backup.json',
+    importBtn:'Load .json',resetBtn:'Reset all',
+    resetConfirm:'Reset all data?',importSuccess:'Data loaded!',importError:'Invalid format',
+    focusMin:'min. focus',chronicle:'STATS',
+    prayerTitle:'PRAYER JOURNAL',prayerPlaceholder:'Write your gratitude, repentance or heart\'s burden... This will vanish tomorrow.',
+    prayerSave:'OFFER UP',prayerClear:'Clear',prayerDone:'Written today',
+    prayerVerse:'«Pray without ceasing.»',prayerRef:'1 THESS 5:17',
+    themeAuto:'Auto',themeManual:'Manual',theme:'THEME',
+    recurring:'Recurring',priority:'Priority',
+    weekDays:['Mo','Tu','We','Th','Fr','Sa','Su'],
+    pomoDone:'25 minutes done — take a rest!',pomoVerse:'«Be still, and know that I am God.»',pomoRef:'PS 46:10',
+    rankLabel:'RANK',
+    sundayTitle:'SUNDAY REVIEW',sundaySubtitle:'A quiet minute over the week past',
+    sundayVerse:'«And God saw all that He had made, and behold, it was very good.»',sundayRef:'GEN 1:31',
+    sundayWeek:'WEEK',sundayTasksDone:'Tasks done',sundayHabitsKept:'Habits kept',
+    sundayCoinsEarned:'Coins earned',sundayPrayerDays:'Days of prayer',sundayFocusMin:'Focus minutes',
+    sundayReflectLabel:'What I take from this week',
+    sundayReflectPlaceholder:'Where did I see light? Where did I stumble? What am I grateful for...',
+    sundayClose:'CLOSE',sundaySave:'SAVE',sundayLater:'Later',
+    sundayHistoryTitle:'PAST REVIEWS',
+    support:'Support the author',supportTip:'Tip jar',supportBoosty:'Boosty',
+  },
+};
+
+// ── DATA ──────────────────────────────────────────────────
+const VERSES=[
+  {text:'«Слово Твоё — светильник ноге моей и свет стезе моей.»',ref:'ПСАЛОМ 118:105'},
+  {text:'«Всё могу в укрепляющем меня Иисусе Христе.»',ref:'ФИЛИППИЙЦАМ 4:13'},
+  {text:'«Предай Господу дела твои, и замыслы твои осуществятся.»',ref:'ПРИТЧИ 16:3'},
+  {text:'«Ибо знаю замыслы, которые имею о вас — замыслы мира.»',ref:'ИЕРЕМИЯ 29:11'},
+  {text:'«Просите, и дано будет вам; ищите, и найдёте.»',ref:'МАТФЕЙ 7:7'},
+  {text:'«Твёрдого духом Ты хранишь в совершенном мире.»',ref:'ИСАИЯ 26:3'},
+  {text:'«Возложи на Господа заботы твои, и Он поддержит тебя.»',ref:'ПСАЛОМ 54:23'},
+  {text:'«Начало мудрости — страх Господень.»',ref:'ПРИТЧИ 1:7'},
+  {text:'«Кто верен в малом, тот верен и во многом.»',ref:'ЛУКИ 16:10'},
+  {text:'«Господь — пастырь мой; я ни в чём не буду нуждаться.»',ref:'ПСАЛОМ 22:1'},
+  {text:'«Рука прилежных будет господствовать.»',ref:'ПРИТЧИ 12:24'},
+  {text:'«Блажен человек, который переносит искушение.»',ref:'ИАКОВ 1:12'},
+  {text:'«Не бойся, ибо Я с тобою; не смущайся, ибо Я Бог твой.»',ref:'ИСАИЯ 41:10'},
+  {text:'«Будь мужествен и непоколебим; не страшись и не ужасайся.»',ref:'ИИСУС НАВИН 1:9'},
+  {text:'«Сердце человека обдумывает свой путь, но Господь управляет шествием его.»',ref:'ПРИТЧИ 16:9'},
+  {text:'«Уповай на Господа всем сердцем твоим и не полагайся на разум твой.»',ref:'ПРИТЧИ 3:5'},
+  {text:'«Радуйтесь всегда в Господе; и ещё говорю: радуйтесь.»',ref:'ФЛП 4:4'},
+  {text:'«Любовь долготерпит, милосердствует, не ищет своего.»',ref:'1 КОР 13:4'},
+  {text:'«Да не смущается сердце ваше; веруйте в Бога и в Меня веруйте.»',ref:'ИОАНН 14:1'},
+  {text:'«Бодрствуйте, стойте в вере, будьте мужественны, тверды.»',ref:'1 КОР 16:13'},
+  {text:'«Ходите осторожно, не как неразумные, но как мудрые.»',ref:'ЕФ 5:15'},
+  {text:'«Кто во Христе, тот новая тварь; древнее прошло — теперь всё новое.»',ref:'2 КОР 5:17'},
+  {text:'«Бог есть свет, и нет в Нём никакой тьмы.»',ref:'1 ИОАНН 1:5'},
+  {text:'«Тесны врата и узок путь, ведущие в жизнь.»',ref:'МАТФЕЙ 7:14'},
+  {text:'«Стучите, и отворят вам.»',ref:'МАТФЕЙ 7:7'},
+  {text:'«В мире будете иметь скорбь; но мужайтесь: Я победил мир.»',ref:'ИОАНН 16:33'},
+  {text:'«Любящим Бога всё содействует ко благу.»',ref:'РИМ 8:28'},
+  {text:'«Если Бог за нас, кто против нас?»',ref:'РИМ 8:31'},
+  {text:'«Не побеждай зла злом, но побеждай зло добром.»',ref:'РИМ 12:21'},
+  {text:'«Бодрствуйте и молитесь, чтобы не впасть в искушение.»',ref:'МАТФЕЙ 26:41'},
+  {text:'«Господь — крепость моя и щит мой; на Него уповало сердце моё.»',ref:'ПСАЛОМ 27:7'},
+  {text:'«Сей день сотворил Господь: возрадуемся и возвеселимся в оный.»',ref:'ПСАЛОМ 117:24'},
+  {text:'«Ты исследуешь путь мой и место отдохновения моего.»',ref:'ПСАЛОМ 138:3'},
+  {text:'«Изведи из темницы душу мою, чтобы славить имя Твоё.»',ref:'ПСАЛОМ 141:8'},
+  {text:'«Когда я в страхе, на Тебя я уповаю.»',ref:'ПСАЛОМ 55:4'},
+  {text:'«Сердце чистое сотвори во мне, Боже, и дух правый обнови.»',ref:'ПСАЛОМ 50:12'},
+  {text:'«Ожидай Господа; мужайся, и да укрепляется сердце твоё.»',ref:'ПСАЛОМ 26:14'},
+  {text:'«Изобилие мира, доколе луна не исчезнет.»',ref:'ПСАЛОМ 71:7'},
+  {text:'«Блажен муж, который не ходит на совет нечестивых.»',ref:'ПСАЛОМ 1:1'},
+  {text:'«Утром услышь голос мой; утром предстану пред Тобою.»',ref:'ПСАЛОМ 5:4'},
+  {text:'«Лучше малое праведника, чем богатство многих нечестивых.»',ref:'ПСАЛОМ 36:16'},
+  {text:'«Воззови ко Мне — и Я отвечу тебе, покажу тебе великое и недоступное.»',ref:'ИЕРЕМИЯ 33:3'},
+  {text:'«Но надеющиеся на Господа обновятся в силе.»',ref:'ИСАИЯ 40:31'},
+  {text:'«Возлюби Господа Бога твоего всем сердцем твоим.»',ref:'МАТФЕЙ 22:37'},
+  {text:'«Ищите же прежде Царства Божия и правды Его.»',ref:'МАТФЕЙ 6:33'},
+  {text:'«Не заботьтесь о завтрашнем дне; довольно для каждого дня своей заботы.»',ref:'МАТФЕЙ 6:34'},
+  {text:'«Кто хочет быть первым, будь из всех последним и всем слугою.»',ref:'МАРК 9:35'},
+  {text:'«Истинно говорю вам: если не обратитесь и не будете как дети, не войдёте в Царство.»',ref:'МАТФЕЙ 18:3'},
+  {text:'«Иго Моё благо и бремя Моё легко.»',ref:'МАТФЕЙ 11:30'},
+  {text:'«Я свет миру; кто последует за Мною, не будет ходить во тьме.»',ref:'ИОАНН 8:12'},
+  {text:'«Блаженны кроткие, ибо они наследуют землю.»',ref:'МАТФЕЙ 5:5'},
+  {text:'«Блаженны алчущие и жаждущие правды, ибо они насытятся.»',ref:'МАТФЕЙ 5:6'},
+  {text:'«Так да светит свет ваш пред людьми, чтобы они видели ваши добрые дела.»',ref:'МАТФЕЙ 5:16'},
+  {text:'«Вечером, и утром, и в полдень буду умолять и вопиять.»',ref:'ПСАЛОМ 54:18'},
+  {text:'«Душа моя жаждет Бога крепкого, живого.»',ref:'ПСАЛОМ 41:3'},
+  {text:'«Время всякой вещи под небом.»',ref:'ЕККЛ 3:1'},
+  {text:'«Нет ничего нового под солнцем.»',ref:'ЕККЛ 1:9'},
+  {text:'«Бойся Бога и заповеди Его соблюдай — в этом всё для человека.»',ref:'ЕККЛ 12:13'},
+  {text:'«Доброе имя лучше большого богатства.»',ref:'ПРИТЧИ 22:1'},
+  {text:'«Кроткий ответ отвращает гнев, а оскорбительное слово возбуждает ярость.»',ref:'ПРИТЧИ 15:1'},
+  {text:'«Не отказывай в благодеянии нуждающемуся, когда рука твоя в силе.»',ref:'ПРИТЧИ 3:27'},
+  {text:'«Праведник из веры жив будет.»',ref:'ГАЛ 3:11'},
+  {text:'«Не будем унывать, делая добро.»',ref:'ГАЛ 6:9'},
+  {text:'«Носите бремена друг друга, и таким образом исполните закон Христов.»',ref:'ГАЛ 6:2'},
+  {text:'«Любовь покрывает множество грехов.»',ref:'1 ПЕТРА 4:8'},
+  {text:'«Все заботы ваши возложите на Него, ибо Он печётся о вас.»',ref:'1 ПЕТРА 5:7'},
+  {text:'«Бог нам прибежище и сила, скорый помощник в бедах.»',ref:'ПСАЛОМ 45:2'},
+  {text:'«Очи мои всегда к Господу.»',ref:'ПСАЛОМ 24:15'},
+  {text:'«Когда я в беде, призываю Его, и Он услышит меня.»',ref:'ПСАЛОМ 49:15'},
+  {text:'«Один день в дворах Твоих лучше тысячи.»',ref:'ПСАЛОМ 83:11'},
+  {text:'«Господь — свет мой и спасение моё: кого мне бояться?»',ref:'ПСАЛОМ 26:1'},
+  {text:'«Не оставит Господь жезла нечестивых над жребием праведных.»',ref:'ПСАЛОМ 124:3'},
+  {text:'«Изливаю пред Ним моление моё; печаль мою открываю Ему.»',ref:'ПСАЛОМ 141:3'},
+  {text:'«В терпении вашем спасайте души ваши.»',ref:'ЛУКА 21:19'},
+  {text:'«Не в сильных конях Его благоволение.»',ref:'ПСАЛОМ 146:10'},
+  {text:'«Восстанет Бог — и расточатся враги Его.»',ref:'ПСАЛОМ 67:2'},
+  {text:'«Помолимся друг за друга, да исцелимся.»',ref:'ИАК 5:16'},
+  {text:'«Старайтесь иметь мир со всеми и святость.»',ref:'ЕВР 12:14'},
+  {text:'«Без веры угодить Богу невозможно.»',ref:'ЕВР 11:6'},
+  {text:'«Вера же есть осуществление ожидаемого и уверенность в невидимом.»',ref:'ЕВР 11:1'},
+  {text:'«В Нём была жизнь, и жизнь была свет человеков.»',ref:'ИОАНН 1:4'},
+  {text:'«Вы — соль земли.»',ref:'МАТФЕЙ 5:13'},
+  {text:'«Где двое или трое собраны во имя Моё, там и Я посреди них.»',ref:'МАТФЕЙ 18:20'},
+  {text:'«Не давайте святыни псам.»',ref:'МАТФЕЙ 7:6'},
+  {text:'«Дух дышит, где хочет.»',ref:'ИОАНН 3:8'},
+  {text:'«Я есмь путь, и истина, и жизнь.»',ref:'ИОАНН 14:6'},
+  {text:'«Мир оставляю вам, мир Мой даю вам.»',ref:'ИОАНН 14:27'},
+  {text:'«Без Меня не можете делать ничего.»',ref:'ИОАНН 15:5'},
+  {text:'«В смирении почитайте один другого высшим себя.»',ref:'ФЛП 2:3'},
+  {text:'«Помышляйте о горнем, а не о земном.»',ref:'КОЛ 3:2'},
+  {text:'«Будьте трезвы, бодрствуйте.»',ref:'1 ПЕТРА 5:8'},
+  {text:'«Кротким даст благодать.»',ref:'ИАК 4:6'},
+  {text:'«Поднимаю глаза мои к горам — откуда придёт помощь моя.»',ref:'ПСАЛОМ 120:1'},
+  {text:'«Не оставлю тебя и не покину тебя.»',ref:'ИИС НАВ 1:5'},
+  {text:'«Бодрствующее око — друг твой.»',ref:'ПРИТЧИ 27:6'},
+  {text:'«Меч духовный — слово Божие.»',ref:'ЕФ 6:17'},
+  {text:'«Утешайтесь надеждою; в скорби будьте терпеливы.»',ref:'РИМ 12:12'},
+  {text:'«Любовь — совокупность совершенства.»',ref:'КОЛ 3:14'},
+  {text:'«Не воздавайте злом за зло.»',ref:'1 ПЕТРА 3:9'},
+  {text:'«Просите, чтобы радость ваша была совершенна.»',ref:'ИОАНН 16:24'},
+  {text:'«Светильник для тела есть око.»',ref:'МАТФЕЙ 6:22'},
+];
+
+// ── LECTIO DIVINA — 4 stages of meditation on a verse ─────
+const LECTIO_STAGES={
+  ru:[
+    {label:'LECTIO',title:'Чтение',hint:'Прочитай слова медленно, вслух или шёпотом. Не спеши.'},
+    {label:'MEDITATIO',title:'Размышление',hint:'Какое слово или образ задевают сердце? Останься с ним.'},
+    {label:'ORATIO',title:'Молитва',hint:'Ответь Богу — благодарностью, прошением или тишиной.'},
+    {label:'CONTEMPLATIO',title:'Созерцание',hint:'Просто будь. Дай слову прорасти в покое.'}
+  ],
+  en:[
+    {label:'LECTIO',title:'Reading',hint:'Read the words slowly, aloud or in whisper. Do not hurry.'},
+    {label:'MEDITATIO',title:'Meditation',hint:'Which word or image touches your heart? Stay with it.'},
+    {label:'ORATIO',title:'Prayer',hint:'Answer God — with thanks, request, or silence.'},
+    {label:'CONTEMPLATIO',title:'Contemplation',hint:'Simply be. Let the word take root in peace.'}
+  ]
+};
+
+const REWARDS=[
+  {id:1,cat:'rest',name:'Час тишины',nameEn:'Hour of Silence',icon:'◎',cost:30,verse:'«Придите ко Мне все труждающиеся.»',ref:'МФ 11:28',desc:'Законный отдых без вины',descEn:'A guilt-free rest'},
+  {id:2,cat:'rest',name:'Долгий сон', nameEn:'Long Sleep',    icon:'☽',cost:50,verse:'«Он дарует сон возлюбленному Своему.»',ref:'ПС 126:2',desc:'Поспать вволю',descEn:'Sleep as long as you need'},
+  {id:3,cat:'rest',name:'Прогулка',   nameEn:'A Walk',        icon:'✦',cost:25,verse:'«Он ведёт меня к водам тихим.»',ref:'ПС 22:2',desc:'Свежий воздух и ясность',descEn:'Fresh air and clear mind'},
+  {id:4,cat:'joy', name:'Любимый фильм',nameEn:'Favourite Film',icon:'◈',cost:80,verse:'«Радуйтесь всегда в Господе.»',ref:'ФЛП 4:4',desc:'Вечер с хорошим кино',descEn:'A movie evening'},
+  {id:5,cat:'joy', name:'Вкусный ужин',nameEn:'Special Dinner',icon:'◇',cost:70,verse:'«Хлеб свой ешь с весельем.»',ref:'ЕКЛ 9:7',desc:'Заказать что-то особенное',descEn:'Order something special'},
+  {id:6,cat:'joy', name:'Игры — 1 час',nameEn:'Games 1 Hour', icon:'✧',cost:60,verse:'«Есть время смеяться.»',ref:'ЕКЛ 3:4',desc:'Заслуженное игровое время',descEn:'Earned gaming time'},
+  {id:8,cat:'holy',name:'Паломничество',nameEn:'Journey',     icon:'☩',cost:400,verse:'«Ищите, и найдёте.»',ref:'МФ 7:7',desc:'Поездка в любимое место',descEn:'A trip to a cherished place'},
+  {id:9, cat:'rest',name:'Утренний кофе',  nameEn:'Morning Coffee',  icon:'◐',cost:15, verse:'«Хлеб и вода — есть.»',ref:'ИС 33:16',desc:'Спокойное утро без спешки',descEn:'A slow morning, no rush'},
+  {id:10,cat:'joy', name:'Книга',          nameEn:'A Book',          icon:'❉',cost:90, verse:'«Слова мудрых — как иглы пастырей.»',ref:'ЕКЛ 12:11',desc:'Купить книгу, которую давно хотел',descEn:'Buy a long-awaited book'},
+  {id:12,cat:'alms',name:'Милостыня',      nameEn:'Almsgiving',      icon:'✚',cost:50, verse:'«Тайно подающий милостыню — отец твой увидит.»',ref:'МФ 6:4',desc:'Отдай Богу — без награды себе',descEn:'Give to God — claim no reward'},
+  {id:13,cat:'alms',name:'Помощь ближнему',nameEn:'Aid a Neighbour', icon:'❀',cost:80, verse:'«Носите бремена друг друга.»',ref:'ГАЛ 6:2',desc:'Время или дело для другого',descEn:'Time or work for another'},
+  {id:14,cat:'alms',name:'Свеча в храме',  nameEn:'Candle in Church',icon:'❋',cost:40, verse:'«Свет ваш да светит пред людьми.»',ref:'МФ 5:16',desc:'Зайти в храм и поставить свечу',descEn:'Visit a church, light a candle'},
+  {id:15,cat:'holy',name:'Час Писания',    nameEn:'Hour of Scripture',icon:'✠',cost:120,verse:'«Слово Твоё утвердило меня.»',ref:'ПС 118:50',desc:'Час медленного чтения',descEn:'An hour of slow reading'},
+  {id:16,cat:'holy',name:'Суббота',        nameEn:'Sabbath',         icon:'✡',cost:200,verse:'«В шесть дней делай дела свои, а в день седьмой — суббота.»',ref:'ИСХ 23:12',desc:'Полный день покоя',descEn:'A full day of rest'},
+];
+const REWARD_CATS={rest:{label:'ПОКОЙ',labelEn:'REST',color:'#3a6a5a'},joy:{label:'РАДОСТЬ',labelEn:'JOY',color:'#7a6018'},alms:{label:'МИЛОСТЫНЯ',labelEn:'ALMS',color:'#5a4a8a'},holy:{label:'ОСОБОЕ',labelEn:'SACRED',color:'#7a4a2a'}};
+
+const ACHIEVEMENTS=[
+  {id:'first',icon:'✦',title:'Первый шаг',titleEn:'First Step',desc:'Выполни первое дело',descEn:'Complete first task',verse:'«Путь начинается с одного шага.»',ref:'ПРИТЧ 4:18',check:s=>s.completedCount>=1},
+  {id:'streak3',icon:'❉',title:'Три огня',titleEn:'Three Flames',desc:'Серия 3 дня',descEn:'3-day streak',verse:'«Верный в малом верен и во многом.»',ref:'ЛК 16:10',check:s=>s.streak>=3},
+  {id:'streak7',icon:'✡',title:'Неделя усердия',titleEn:'Week of Diligence',desc:'Серия 7 дней',descEn:'7-day streak',verse:'«В седьмой день почил от всех дел Своих.»',ref:'БЫТ 2:2',check:s=>s.streak>=7},
+  {id:'streak30',icon:'☀',title:'Месяц верности',titleEn:'Month of Faith',desc:'Серия 30 дней',descEn:'30-day streak',verse:'«Претерпевший до конца спасётся.»',ref:'МФ 10:22',check:s=>s.streak>=30},
+  {id:'coins100',icon:'⚜',title:'Сто монет',titleEn:'Hundred Coins',desc:'Накопи 100 монет',descEn:'Earn 100 coins',verse:'«Сокровища неправедные не пользуют.»',ref:'ПРИТЧ 10:2',check:s=>s.coins>=100},
+  {id:'habits5',icon:'⚘',title:'Живой сад',titleEn:'Living Garden',desc:'5 привычек',descEn:'5 habits',verse:'«Кто возделывает землю, тот будет сыт.»',ref:'ПРИТЧ 12:11',check:s=>s.habitsCount>=5},
+  {id:'focus60',icon:'✺',title:'Час молчания',titleEn:'Hour of Silence',desc:'60 минут фокуса',descEn:'60 min of focus',verse:'«Будьте тихи и познайте, что Я Бог.»',ref:'ПС 45:11',check:s=>s.totalFocusMin>=60},
+  {id:'tasks20',icon:'❧',title:'Полный свиток',titleEn:'Full Scroll',desc:'Выполни 20 дел',descEn:'Complete 20 tasks',verse:'«Рука прилежных будет господствовать.»',ref:'ПРИТЧ 12:24',check:s=>s.completedCount>=20},
+  {id:'prayer7',icon:'✟',title:'Семь молитв',titleEn:'Seven Prayers',desc:'7 дней журнала',descEn:'Journal 7 days',verse:'«Молитесь непрестанно.»',ref:'1 ФЕС 5:17',check:s=>s.prayerDays>=7},
+  {id:'streak100',icon:'☩',title:'Сотня дней',titleEn:'Hundred Days',desc:'Серия 100 дней',descEn:'100-day streak',verse:'«Бегущий получает награду.»',ref:'1 КОР 9:24',check:s=>s.streak>=100},
+  {id:'coins500',icon:'✠',title:'Полное хранилище',titleEn:'Full Storehouse',desc:'Накопи 500 монет',descEn:'Earn 500 coins',verse:'«Где сокровище ваше, там и сердце ваше.»',ref:'МФ 6:21',check:s=>s.coins>=500},
+  {id:'coins1000',icon:'❖',title:'Тысяча даров',titleEn:'Thousand Gifts',desc:'Накопи 1000 монет',descEn:'Earn 1000 coins',verse:'«Доброе дело — взаймы Господу.»',ref:'ПРИТЧ 19:17',check:s=>s.coins>=1000},
+  {id:'tasks50',icon:'⌬',title:'Книга трудов',titleEn:'Book of Labors',desc:'Выполни 50 дел',descEn:'Complete 50 tasks',verse:'«Трудящийся достоин пропитания.»',ref:'МФ 10:10',check:s=>s.completedCount>=50},
+  {id:'tasks100',icon:'⚔',title:'Сто побед',titleEn:'Hundred Victories',desc:'Выполни 100 дел',descEn:'Complete 100 tasks',verse:'«Подвигом добрым я подвизался.»',ref:'2 ТИМ 4:7',check:s=>s.completedCount>=100},
+  {id:'focus180',icon:'❂',title:'Три часа тишины',titleEn:'Three Hours of Silence',desc:'180 минут фокуса',descEn:'180 min of focus',verse:'«Доброе же делать не унываем.»',ref:'ГАЛ 6:9',check:s=>s.totalFocusMin>=180},
+  {id:'focus600',icon:'✸',title:'Десять часов',titleEn:'Ten Hours',desc:'600 минут фокуса',descEn:'600 min of focus',verse:'«Дни лукавы; искупайте время.»',ref:'ЕФ 5:16',check:s=>s.totalFocusMin>=600},
+  {id:'habits10',icon:'❀',title:'Древо жизни',titleEn:'Tree of Life',desc:'10 привычек',descEn:'10 habits',verse:'«И будет он как древо при потоках вод.»',ref:'ПС 1:3',check:s=>s.habitsCount>=10},
+  {id:'habitStreak30',icon:'✷',title:'Лампада не гаснет',titleEn:'Lamp Unfading',desc:'Привычка 30 дней подряд',descEn:'Habit 30-day streak',verse:'«Светильник твой да не угасает.»',ref:'ПРИТЧ 31:18',check:s=>s.maxHabitStreak>=30},
+  {id:'prayer30',icon:'☧',title:'Месяц молитв',titleEn:'Month of Prayer',desc:'30 дней журнала',descEn:'Journal 30 days',verse:'«Воззови ко Мне — и Я отвечу тебе.»',ref:'ИЕР 33:3',check:s=>s.prayerDays>=30},
+  {id:'almsGiver',icon:'⊕',title:'Милосердный',titleEn:'Merciful Giver',desc:'Принеси первую милостыню',descEn:'Give first alms',verse:'«Блаженнее давать, нежели принимать.»',ref:'ДЕЯН 20:35',check:s=>(s.almsCount||0)>=1},
+  {id:'pomo10',icon:'❈',title:'Десять помодоро',titleEn:'Ten Pomodoros',desc:'Заверши 10 циклов помодоро',descEn:'Complete 10 pomodoros',verse:'«В тишине и уповании — крепость ваша.»',ref:'ИС 30:15',check:s=>(s.pomoCount||0)>=10},
+  {id:'allThemes',icon:'✹',title:'Все часы дня',titleEn:'All Hours',desc:'Попробовать все темы',descEn:'Try all themes',verse:'«От востока солнца до запада.»',ref:'ПС 49:1',check:s=>(s.themesUsed||[]).length>=4},
+  {id:'sabbath',icon:'☥',title:'Седьмой день',titleEn:'Seventh Day',desc:'4 субботы покоя',descEn:'4 sabbaths kept',verse:'«Помни день субботний, чтобы святить его.»',ref:'ИСХ 20:8',check:s=>(s.sabbathCount||0)>=4},
+  {id:'lectio',icon:'⍟',title:'Размышление',titleEn:'Lectio Divina',desc:'Пройди 7 размышлений над словом',descEn:'7 meditations on the Word',verse:'«Поучайся в законе Господнем день и ночь.»',ref:'ПС 1:2',check:s=>(s.lectioCount||0)>=7},
+];
+
+// Local-timezone YYYY-MM-DD. Using toISOString() would give UTC, which causes the
+// "midnight didn't roll over" bug for users east of UTC (e.g. local 00:30 = UTC 21:30 prev day).
+function dateKey(d){return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;}
+const todayKey=()=>dateKey(new Date());
+const fmtTime=s=>`${Math.floor(s/60)}:${(s%60).toString().padStart(2,'0')}`;
+const WEEK_FULL={ru:['воскресенье','понедельник','вторник','среда','четверг','пятница','суббота'],en:['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday']};
+const MONTHS_FULL={ru:['января','февраля','марта','апреля','мая','июня','июля','августа','сентября','октября','ноября','декабря'],en:['January','February','March','April','May','June','July','August','September','October','November','December']};
+function fmtDateLong(lang){const d=new Date();return `${WEEK_FULL[lang][d.getDay()]} · ${d.getDate()} ${MONTHS_FULL[lang][d.getMonth()]}`;}
+function fmtDateShort(date,lang){const d=new Date(date);return `${d.getDate()} ${MONTHS_FULL[lang][d.getMonth()]}`;}
+function calcHabitStreak(history){
+  if(!history?.length)return 0;
+  let streak=0,d=new Date();
+  if(!history.includes(todayKey()))d.setDate(d.getDate()-1);
+  for(let i=0;i<365;i++){
+    if(history.includes(dateKey(d))){streak++;d.setDate(d.getDate()-1);}else break;
+  }
+  return streak;
+}
+function load(){try{return JSON.parse(localStorage.getItem('lumen3')||'{}');}catch{return {};}}
+function save(s){localStorage.setItem('lumen3',JSON.stringify(s));}
+
+// ── ICONS ─────────────────────────────────────────────────
+const Ic=({n,s=20,c})=>{
+  const col=c||'#c9a227';
+  const p={stroke:col,strokeWidth:1.5,fill:'none',strokeLinecap:'round',strokeLinejoin:'round'};
+  const icons={
+    tasks:<svg width={s} height={s} viewBox="0 0 24 24"><rect x="3" y="5" width="13" height="2" rx="1" {...p}/><rect x="3" y="11" width="13" height="2" rx="1" {...p}/><rect x="3" y="17" width="8" height="2" rx="1" {...p}/><polyline points="17,13 19,15 23,11" {...p}/></svg>,
+    habits:<svg width={s} height={s} viewBox="0 0 24 24"><path d="M12 2C10 6 6 8 6 12a6 6 0 0 0 12 0c0-4-4-6-6-10z" fill={col} stroke="none" opacity="0.85"/><path d="M12 7c-1 2.5-3 3.5-3 5.5a3 3 0 0 0 6 0c0-2-2-3-3-5.5z" fill="#0d0b08" stroke="none"/></svg>,
+    chronicle:<svg width={s} height={s} viewBox="0 0 24 24"><polyline points="4,18 8,13 12,15 17,9 20,12" {...p}/><line x1="4" y1="20" x2="20" y2="20" {...p}/></svg>,
+    rewards:<svg width={s} height={s} viewBox="0 0 24 24"><path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 17l-6.2 4.3 2.4-7.4L2 9.4h7.6z" {...p}/></svg>,
+    scripture:<svg width={s} height={s} viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="18" rx="2" {...p}/><line x1="8" y1="8" x2="16" y2="8" {...p}/><line x1="8" y1="12" x2="16" y2="12" {...p}/><line x1="8" y1="16" x2="12" y2="16" {...p}/></svg>,
+    fire:<svg width={s} height={s} viewBox="0 0 24 24"><path d="M12 2C10 6 7 8 7 12a5 5 0 0 0 10 0c0-2-1-3.5-2-5-0.5 1.5-1 2-1.5 2S12 7 12 2z" fill={col} stroke="none"/></svg>,
+    coin:<svg width={s} height={s} viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" {...p}/><text x="12" y="16" textAnchor="middle" fontSize="10" fill={col} stroke="none" fontFamily="Cinzel">₴</text></svg>,
+    clock:<svg width={s} height={s} viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" {...p}/><polyline points="12,7 12,12 15,15" {...p}/></svg>,
+    play:<svg width={s} height={s} viewBox="0 0 24 24"><polygon points="6,4 20,12 6,20" fill={col} stroke="none"/></svg>,
+    pause:<svg width={s} height={s} viewBox="0 0 24 24"><rect x="5" y="4" width="4" height="16" rx="1" fill={col} stroke="none"/><rect x="15" y="4" width="4" height="16" rx="1" fill={col} stroke="none"/></svg>,
+    stop:<svg width={s} height={s} viewBox="0 0 24 24"><rect x="5" y="5" width="14" height="14" rx="2" fill={col} stroke="none"/></svg>,
+    plus:<svg width={s} height={s} viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19" {...p}/><line x1="5" y1="12" x2="19" y2="12" {...p}/></svg>,
+    check:<svg width={s} height={s} viewBox="0 0 24 24"><polyline points="5,12 10,17 19,8" stroke={col} strokeWidth="2.5" fill="none" strokeLinecap="round" strokeLinejoin="round"/></svg>,
+    trash:<svg width={s} height={s} viewBox="0 0 24 24"><polyline points="3,6 21,6" {...p}/><path d="M8,6V4h8v2" {...p}/><path d="M19,6l-1,14H6L5,6" {...p}/></svg>,
+    close:<svg width={s} height={s} viewBox="0 0 24 24"><line x1="5" y1="5" x2="19" y2="19" {...p} strokeWidth="2"/><line x1="19" y1="5" x2="5" y2="19" {...p} strokeWidth="2"/></svg>,
+    gear:<svg width={s} height={s} viewBox="0 0 24 24"><circle cx="12" cy="12" r="3" {...p}/><path d="M12 2v2M12 20v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M2 12h2M20 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" {...p} strokeWidth="1.8"/></svg>,
+    edit:<svg width={s} height={s} viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" {...p}/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" {...p}/></svg>,
+    star:<svg width={s} height={s} viewBox="0 0 24 24"><path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 17l-6.2 4.3 2.4-7.4L2 9.4h7.6z" fill={col} stroke="none"/></svg>,
+    starOff:<svg width={s} height={s} viewBox="0 0 24 24"><path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 17l-6.2 4.3 2.4-7.4L2 9.4h7.6z" {...p}/></svg>,
+    up:<svg width={s} height={s} viewBox="0 0 24 24"><polyline points="6,15 12,9 18,15" {...p} strokeWidth="2"/></svg>,
+    down:<svg width={s} height={s} viewBox="0 0 24 24"><polyline points="6,9 12,15 18,9" {...p} strokeWidth="2"/></svg>,
+    repeat:<svg width={s} height={s} viewBox="0 0 24 24"><polyline points="17,1 21,5 17,9" {...p}/><path d="M3 11V9a4 4 0 0 1 4-4h14" {...p}/><polyline points="7,23 3,19 7,15" {...p}/><path d="M21 13v2a4 4 0 0 1-4 4H3" {...p}/></svg>,
+    download:<svg width={s} height={s} viewBox="0 0 24 24"><path d="M12 3v12m-5-5 5 5 5-5" {...p}/><path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2" {...p}/></svg>,
+    upload:<svg width={s} height={s} viewBox="0 0 24 24"><path d="M12 15V3m-5 5 5-5 5 5" {...p}/><path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2" {...p}/></svg>,
+    lock:<svg width={s} height={s} viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2" {...p}/><path d="M8 11V7a4 4 0 0 1 8 0v4" {...p}/></svg>,
+    sun:<svg width={s} height={s} viewBox="0 0 24 24"><circle cx="12" cy="12" r="5" {...p}/><line x1="12" y1="2" x2="12" y2="4" {...p}/><line x1="12" y1="20" x2="12" y2="22" {...p}/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64" {...p}/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78" {...p}/><line x1="2" y1="12" x2="4" y2="12" {...p}/><line x1="20" y1="12" x2="22" y2="12" {...p}/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36" {...p}/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22" {...p}/></svg>,
+    moon:<svg width={s} height={s} viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" {...p}/></svg>,
+    prayer:<svg width={s} height={s} viewBox="0 0 24 24"><path d="M12 22c0 0-8-5-8-12a8 8 0 1 1 16 0c0 7-8 12-8 12z" {...p}/><path d="M12 10v4M10 12h4" {...p}/></svg>,
+  };
+  return icons[n]||null;
+};
+
+// ── TAB ORDER ─────────────────────────────────────────────
+const TAB_ORDER=['tasks','habits','chronicle','rewards','scripture'];
+
+// ── ANIMATED TAB WRAPPER ──────────────────────────────────
+function TabScreen({children,tabKey,prevTab}){
+  const [dynStyle,setDynStyle]=useState({opacity:0});
+  useEffect(()=>{
+    const pi=TAB_ORDER.indexOf(prevTab),ci=TAB_ORDER.indexOf(tabKey);
+    setDynStyle({animation:`${pi<=ci?'tabEnterRight':'tabEnterLeft'} 0.30s cubic-bezier(0.22,1,0.36,1) both`});
+    const id=setTimeout(()=>setDynStyle({}),340);
+    return()=>clearTimeout(id);
+  },[tabKey]);
+  return <div style={{flex:1,overflow:'hidden',display:'flex',flexDirection:'column',...dynStyle}}>{children}</div>;
+}
+
+// ── SHARED ────────────────────────────────────────────────
+const SL=({label,right,C})=>(
+  <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',padding:'16px 0 10px'}}>
+    <span style={{fontFamily:'Cinzel',fontSize:15.5,color:C.textMid,letterSpacing:'0.14em'}}>{label}</span>
+    {right&&<span style={{fontFamily:'Cinzel',fontSize:14.5,color:C.textDim,letterSpacing:'0.1em'}}>{right}</span>}
+  </div>
+);
+
+function Modal({onClose,title,children,C}){
+  return(
+    <div style={{position:'absolute',inset:0,zIndex:100,background:'rgba(0,0,0,0.6)',display:'flex',flexDirection:'column',justifyContent:'flex-end',willChange:'opacity'}} onClick={onClose}>
+      <div onClick={e=>e.stopPropagation()} style={{background:C.surface,backdropFilter:'blur(18px)',WebkitBackdropFilter:'blur(18px)',borderTop:`1px solid ${C.border}`,borderRadius:'20px 20px 0 0',padding:'22px 20px 40px',animation:'slideUp 0.3s cubic-bezier(0.16,1,0.3,1)',willChange:'transform'}}>
+        <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',marginBottom:18}}>
+          <span style={{fontFamily:'Cinzel',fontSize:18,color:C.text,letterSpacing:'0.1em'}}>{title}</span>
+          <div onClick={onClose} style={{cursor:'pointer',opacity:0.6}}><Ic n="close" s={25} c={C.textMid}/></div>
+        </div>
+        {children}
+      </div>
+    </div>
+  );
+}
+
+// Smoothly counts up/down to `value`. Pulses on change.
+function AnimatedNumber({value,style,duration=600}){
+  const [display,setDisplay]=useState(value);
+  const [pulse,setPulse]=useState(false);
+  const displayRef=useRef(value);displayRef.current=display;
+  const rafRef=useRef(0);
+  useEffect(()=>{
+    // Animate from whatever is on screen right now (handles mid-animation target changes
+    // without snapping back). If we're already at the target, nothing to do.
+    if(value===displayRef.current)return;
+    const from=displayRef.current,to=value,start=performance.now();
+    setPulse(true);
+    cancelAnimationFrame(rafRef.current);
+    const tick=(now)=>{
+      const p=Math.min(1,(now-start)/duration);
+      const eased=1-Math.pow(1-p,3); // easeOutCubic
+      setDisplay(Math.round(from+(to-from)*eased));
+      if(p<1)rafRef.current=requestAnimationFrame(tick);
+    };
+    rafRef.current=requestAnimationFrame(tick);
+    const tm=setTimeout(()=>setPulse(false),duration);
+    return()=>{cancelAnimationFrame(rafRef.current);clearTimeout(tm);};
+  },[value]);
+  return <span style={{...style,display:'inline-block',animation:pulse?'numberPulse 0.55s cubic-bezier(0.34,1.56,0.64,1)':'none'}}>{display}</span>;
+}
+
+function StatBar({streak,todayCoins,coins,t,C,name,lang}){
+  const [prevCoins,setPrevCoins]=useState(coins);
+  const [shimmer,setShimmer]=useState(false);
+  useEffect(()=>{
+    if(coins>prevCoins){setShimmer(true);setTimeout(()=>setShimmer(false),700);}
+    setPrevCoins(coins);
+  },[coins]);
+  const rank=getRank(coins);
+  return(
+    <div style={{display:'flex',border:`1px solid ${C.border}`,borderRadius:8,overflow:'hidden',margin:'12px 16px 0',transition:'border-color 0.3s ease'}}>
+      {[{icon:'fire',valNum:streak,suffix:` ${t.days}`,label:t.streak,glow:streak>0},
+        {icon:'clock',valNum:todayCoins,label:t.today},
+        {icon:'coin',valNum:coins,label:t.coins,gold:true,shine:shimmer},
+      ].map((item,i)=>(
+        <div key={i} style={{flex:1,padding:'12px 0',textAlign:'center',borderRight:i<2?`1px solid ${C.border}`:'none',
+          display:'flex',flexDirection:'column',alignItems:'center',gap:3,
+          background:item.shine?'linear-gradient(90deg,transparent,rgba(201,162,39,0.1),transparent)':'transparent',
+          backgroundSize:'200%',animation:item.shine?'shimmerGold 0.6s ease':'none',transition:'background 0.4s'}}>
+          <div style={{display:'flex',alignItems:'center',gap:4}}>
+            <Ic n={item.icon} s={19} c={item.glow||item.gold?C.gold:C.goldDim}/>
+            <span style={{fontFamily:'Cinzel',fontSize:21,color:item.glow||item.gold?C.gold:C.text,fontWeight:500}}>
+              <AnimatedNumber value={item.valNum}/>{item.suffix||''}
+            </span>
+          </div>
+          <span style={{fontFamily:'Cinzel',fontSize:14,color:item.gold?C.gold:C.textDim,letterSpacing:'0.12em'}}>{item.label}</span>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+function VerseCard({verse,C,lang}){
+  const [key,setKey]=useState(verse?.text||'');
+  useEffect(()=>{setKey(verse?.text||'');},[verse?.text]);
+  return(
+    <div style={{margin:'12px 16px 0',border:`1px solid ${C.border}`,borderRadius:8,padding:'18px 18px 14px',position:'relative',background:C.goldFaint,overflow:'hidden'}}>
+      {[[0,0],[0,1],[1,0],[1,1]].map(([b,r],i)=>(
+        <div key={i} style={{position:'absolute',[b?'bottom':'top']:'3px',[r?'right':'left']:'3px',width:10,height:10,
+          borderTop:b?'none':`1px solid ${C.goldDim}`,borderBottom:b?`1px solid ${C.goldDim}`:'none',
+          borderLeft:r?'none':`1px solid ${C.goldDim}`,borderRight:r?`1px solid ${C.goldDim}`:'none'}}/>
+      ))}
+      {/* Header label */}
+      <div style={{display:'flex',alignItems:'center',gap:7,justifyContent:'center',marginBottom:10}}>
+        <div style={{height:1,width:18,background:`linear-gradient(to right,transparent,${C.goldDim})`}}/>
+        <span style={{fontFamily:'Cinzel',fontSize:11,color:C.goldDim,letterSpacing:'0.22em'}}>{lang==='en'?'VERSE OF THE DAY':'СТИХ ДНЯ'}</span>
+        <div style={{height:1,width:18,background:`linear-gradient(to left,transparent,${C.goldDim})`}}/>
+      </div>
+      <div key={key} style={{animation:'fadeIn 0.6s ease both'}}>
+        <p style={{fontFamily:'Spectral',fontStyle:'italic',fontSize:20.5,color:C.text,lineHeight:1.65,textAlign:'center',marginBottom:11}}>{verse.text}</p>
+        <div style={{display:'flex',alignItems:'center',gap:8,justifyContent:'center',marginBottom:8}}>
+          <div style={{height:1,width:22,background:`linear-gradient(to right,transparent,${C.goldDim})`}}/>
+          <div style={{width:4,height:4,borderRadius:'50%',background:C.goldDim}}/>
+          <div style={{height:1,width:22,background:`linear-gradient(to left,transparent,${C.goldDim})`}}/>
+        </div>
+        <p style={{fontFamily:'Cinzel',fontSize:14,color:C.textMid,textAlign:'center',letterSpacing:'0.14em'}}>{verse.ref}</p>
+      </div>
+    </div>
+  );
+}
+
+// ── ONBOARDING ────────────────────────────────────────────
+function Onboarding({onDone,C}){
+  const [name,setName]=useState('');
+  const [step,setStep]=useState(0);
+  const steps=[
+    {title:'LUMEN',sub:'Свет в делах твоих',body:'',btn:'Начать'},
+    {title:'Как тебя зовут?',sub:'',body:'',btn:'Войти'},
+  ];
+  const st=steps[step];
+  function next(){
+    if(step===0){setStep(1);return;}
+    if(name.trim())onDone(name.trim());
+  }
+  return(
+    <div style={{position:'absolute',inset:0,zIndex:500,background:C.bg,display:'flex',flexDirection:'column',alignItems:'center',justifyContent:'center',padding:'40px 32px'}}>
+      <div style={{textAlign:'center',animation:'onboardReveal 0.6s ease both'}}>
+        {/* lamp logo */}
+        <svg width={52} height={64} viewBox="0 0 22 28" style={{marginBottom:24,filter:`drop-shadow(0 0 12px ${C.gold}66)`}}>
+          <ellipse cx="11" cy="7" rx="4.5" ry="5.5" fill={C.gold} opacity="0.12"/>
+          <path d="M11 1C9.8 4 7.5 5.5 7.5 8.2a3.5 3.5 0 0 0 7 0C14.5 5.5 12.2 4 11 1z" fill={C.gold} style={{transformOrigin:'11px 10px',animation:'flameDance 2.8s ease-in-out infinite'}}/>
+          <path d="M11 4.5C10.4 6.2 9.2 7.2 9.2 8.4a1.8 1.8 0 0 0 3.6 0C12.8 7.2 11.6 6.2 11 4.5z" fill="#fde68a" opacity="0.75" style={{transformOrigin:'11px 10px',animation:'flameDance 2.8s ease-in-out infinite'}}/>
+          <line x1="11" y1="11.7" x2="11" y2="13.2" stroke={C.gold} strokeWidth="1.4" strokeLinecap="round"/>
+          <path d="M7 13.5C6.2 13.5 5.5 14.2 5.5 15L5.5 18.5C5.5 19.8 6.5 20.5 8 20.5L14 20.5C15.5 20.5 16.5 19.8 16.5 18.5L16.5 15C16.5 14.2 15.8 13.5 15 13.5Z" fill="none" stroke={C.gold} strokeWidth="1.25" strokeLinejoin="round"/>
+          <path d="M15.5 14.5L19 13" stroke={C.gold} strokeWidth="1.2" strokeLinecap="round"/>
+          <path d="M6.5 15.5C4.5 15.5 3.5 16.5 3.5 17.5C3.5 18.8 4.8 19.5 6 19.5" stroke={C.gold} strokeWidth="1.1" strokeLinecap="round" fill="none"/>
+          <line x1="11" y1="20.5" x2="11" y2="23" stroke={C.gold} strokeWidth="1.4" strokeLinecap="round"/>
+          <path d="M7 23Q6.5 24.5 7.5 25L14.5 25Q15.5 24.5 15 23Z" fill="none" stroke={C.gold} strokeWidth="1.2" strokeLinejoin="round"/>
+        </svg>
+        <p style={{fontFamily:'Cinzel',fontSize:34,letterSpacing:'0.22em',color:C.text,marginBottom:8}}>{st.title}</p>
+        {st.sub&&<p style={{fontFamily:'Spectral',fontStyle:'italic',fontSize:21,color:C.textMid,marginBottom:20,lineHeight:1.6}}>{st.sub}</p>}
+        {st.body&&<p style={{fontFamily:'Inter',fontSize:19.5,color:C.textMid,lineHeight:1.7,marginBottom:32,maxWidth:280}}>{st.body}</p>}
+        {step===1&&(
+          <div style={{marginBottom:28}}>
+            <input value={name} onChange={e=>setName(e.target.value)}
+              onKeyDown={e=>e.key==='Enter'&&next()}
+              placeholder="Твоё имя..."
+              autoFocus={false}
+              style={{width:'100%',background:'transparent',border:`1px solid ${C.border}`,borderRadius:8,padding:'13px 16px',color:C.text,fontFamily:'Spectral',fontSize:22,textAlign:'center',letterSpacing:'0.04em',transition:'border-color 0.25s'}}
+              onFocus={e=>e.target.style.borderColor=C.gold} onBlur={e=>e.target.style.borderColor=C.border}/>
+            <p style={{fontFamily:'Spectral',fontStyle:'italic',fontSize:18,color:C.textMid,marginTop:10,minHeight:54,opacity:name.trim()?1:0,transition:'opacity 0.35s ease',lineHeight:1.5}}>
+              {name.trim()?`${name.trim()}, «да будет путь твой светел.» — ПРИТЧ 4:18`:' '}
+            </p>
+          </div>
+        )}
+
+        <button onClick={next} style={{width:'100%',padding:'14px',background:C.gold,border:'none',borderRadius:8,fontFamily:'Cinzel',fontSize:18,letterSpacing:'0.14em',color:C.bg,cursor:'pointer',fontWeight:600,opacity:(step===1&&!name.trim())?0.4:1,transition:'opacity 0.2s'}}>
+          {st.btn}
+        </button>
+      </div>
+    </div>
+  );
+}
+
+// ── TASK ITEM ─────────────────────────────────────────────
+function TaskItem({task,idx,total,onComplete,onDelete,onEdit,onTogglePriority,onMove,isRunning,elapsed,onTimerStart,onTimerPause,onTimerStop,t,C}){
+  const [popping,setPopping]=useState(false);
+  const [popCoins,setPopCoins]=useState(0);
+  const [particles,setParticles]=useState(false);
+  const coinR={easy:5,medium:10,hard:20};
+  const diffC={easy:C.green,medium:C.gold,hard:C.red};
+  const diffL={easy:t.easy,medium:t.medium,hard:t.hard};
+
+  function handleComplete(){
+    if(task.completed)return;
+    const r=coinR[task.difficulty];
+    setPopping(true);setPopCoins(r);setParticles(true);
+    setTimeout(()=>{setPopping(false);setParticles(false);},1000);
+    onComplete(task.id);
+  }
+  function handleStop(){
+    const c=onTimerStop(task.id);
+    if(c>0){setPopCoins(c);setPopping(true);setTimeout(()=>setPopping(false),900);}
+  }
+
+  return(
+    <div style={{padding:'11px 0',borderBottom:`1px solid ${C.border}`,opacity:task.completed?0.4:1,transition:'opacity 0.3s',animation:'staggerFadeUp 0.3s ease both'}}>
+      <div style={{display:'flex',alignItems:'center',gap:10}}>
+        {/* priority */}
+        <div onClick={()=>!task.completed&&onTogglePriority(task.id)} style={{cursor:task.completed?'default':'pointer',flexShrink:0}}>
+          <Ic n={task.priority?'star':'starOff'} s={20} c={task.priority?C.gold:C.textDim}/>
+        </div>
+        {/* checkbox */}
+        <div onClick={handleComplete} style={{width:26,height:26,borderRadius:5,flexShrink:0,border:`1.5px solid ${task.completed?C.gold:C.border}`,background:task.completed?C.gold:'transparent',display:'flex',alignItems:'center',justifyContent:'center',cursor:task.completed?'default':'pointer',transition:'all 0.2s',position:'relative'}}>
+          {task.completed&&<Ic n="check" s={19} c={C.bg}/>}
+          {popping&&<div style={{position:'absolute',top:-4,left:'50%',transform:'translateX(-50%)',fontFamily:'Cinzel',fontSize:15,color:C.gold,animation:'coinPop 0.9s ease forwards',pointerEvents:'none',whiteSpace:'nowrap'}}>+{popCoins}</div>}
+          {particles&&[0,1,2,3].map(i=><div key={i} style={{position:'absolute',width:5,height:5,borderRadius:'50%',background:C.gold,pointerEvents:'none',animation:`particleFly${i} 0.85s ease-out forwards`}}/>)}
+        </div>
+        {/* text */}
+        <div style={{flex:1,minWidth:0}}>
+          <div style={{display:'flex',alignItems:'center',gap:5}}>
+            <p style={{fontFamily:'Inter',fontSize:19.5,color:C.text,textDecoration:task.completed?'line-through':'none',overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'}}>{task.title}</p>
+            {task.recurring&&<Ic n="repeat" s={17} c={C.textDim}/>}
+          </div>
+          <div style={{display:'flex',gap:7,marginTop:3,alignItems:'center'}}>
+            <span style={{fontFamily:'Cinzel',fontSize:14,color:diffC[task.difficulty],letterSpacing:'0.1em'}}>{diffL[task.difficulty].toUpperCase()}</span>
+            <span style={{fontFamily:'Cinzel',fontSize:14,color:C.textDim}}>+{coinR[task.difficulty]}</span>
+            {elapsed>0&&<span style={{fontFamily:'Cinzel',fontSize:14,color:C.goldDim}}>{Math.floor(elapsed/60)} {t.focusMin}</span>}
+          </div>
+        </div>
+        {/* controls */}
+        {!task.completed?(
+          <div style={{display:'flex',alignItems:'center',gap:4,flexShrink:0}}>
+            {isRunning?(
+              <>
+                <span style={{fontFamily:'Cinzel',fontSize:16,color:C.gold,animation:'pulse 1.5s infinite',minWidth:36}}>{fmtTime(elapsed||0)}</span>
+                <div onClick={()=>onTimerPause(task.id)} style={{cursor:'pointer',padding:2}}><Ic n="pause" s={20} c={C.gold}/></div>
+                <div onClick={handleStop} style={{cursor:'pointer',padding:2}}><Ic n="stop" s={20} c={C.red}/></div>
+              </>
+            ):(
+              <>
+                {elapsed>0&&<span style={{fontFamily:'Cinzel',fontSize:16,color:C.goldDim,minWidth:36}}>{fmtTime(elapsed)}</span>}
+                <div onClick={()=>onTimerStart(task.id)} style={{cursor:'pointer',padding:2,opacity:0.7}}><Ic n="play" s={21} c={C.gold}/></div>
+              </>
+            )}
+            <div onClick={()=>onEdit(task)} style={{padding:2,cursor:'pointer',opacity:0.45}}><Ic n="edit" s={20} c={C.textMid}/></div>
+            {!isRunning&&<div onClick={()=>onDelete(task.id)} style={{padding:2,cursor:'pointer',opacity:0.3}}><Ic n="trash" s={19} c={C.textMid}/></div>}
+          </div>
+        ):null}
+      </div>
+      {isRunning&&(
+        <div style={{marginTop:7,marginLeft:50,height:2,background:C.border,borderRadius:2,overflow:'hidden'}}>
+          <div style={{height:'100%',background:C.gold,width:`${Math.min(100,(elapsed||0)/1500*100)}%`,transition:'width 1s linear'}}/>
+        </div>
+      )}
+    </div>
+  );
+}
+
+// ── TASK MODAL ────────────────────────────────────────────
+function TaskModal({task,onSave,onClose,t,C}){
+  const [title,setTitle]=useState(task?.title||'');
+  const [diff,setDiff]=useState(task?.difficulty||'medium');
+  const [priority,setPriority]=useState(task?.priority||false);
+  const [recurring,setRecurring]=useState(task?.recurring||false);
+  const ref=useRef();
+  useEffect(()=>ref.current?.focus({preventScroll:true}),[]);
+  const diffs=[{key:'easy',coins:5},{key:'medium',coins:10},{key:'hard',coins:20}];
+  const diffL={easy:t.easy,medium:t.medium,hard:t.hard};
+  function submit(){
+    if(!title.trim())return;
+    onSave({...(task||{}),title:title.trim(),difficulty:diff,priority,recurring,id:task?.id||Date.now(),completed:task?.completed||false});
+    onClose();
+  }
+  return(
+    <Modal onClose={onClose} title={task?t.editTask:t.newTask} C={C}>
+      <input ref={ref} value={title} onChange={e=>setTitle(e.target.value)} onKeyDown={e=>e.key==='Enter'&&submit()} placeholder={t.taskPlaceholder}
+        style={{width:'100%',background:'transparent',border:`1px solid ${C.border}`,borderRadius:7,padding:'11px 13px',color:C.text,fontSize:20,marginBottom:14}}/>
+      <p style={{fontFamily:'Cinzel',fontSize:14,color:C.textDim,letterSpacing:'0.12em',marginBottom:9}}>{t.difficulty}</p>
+      <div style={{display:'flex',gap:7,marginBottom:14}}>
+        {diffs.map(d=>(
+          <button key={d.key} onClick={()=>setDiff(d.key)} style={{flex:1,padding:'9px 0',borderRadius:7,cursor:'pointer',border:`1px solid ${diff===d.key?C.gold:C.border}`,background:diff===d.key?C.goldFaint:'transparent',fontFamily:'Cinzel',fontSize:15,color:diff===d.key?C.gold:C.textMid}}>
+            <div>{diffL[d.key]}</div><div style={{fontSize:14,marginTop:2,color:diff===d.key?C.goldDim:C.textDim}}>+{d.coins}</div>
+          </button>
+        ))}
+      </div>
+      <div style={{display:'flex',gap:9,marginBottom:20}}>
+        <button onClick={()=>setPriority(!priority)} style={{flex:1,padding:'9px',borderRadius:7,border:`1px solid ${priority?C.gold:C.border}`,background:priority?C.goldFaint:'transparent',cursor:'pointer',display:'flex',alignItems:'center',justifyContent:'center',gap:7}}>
+          <Ic n="star" s={19} c={priority?C.gold:C.textDim}/><span style={{fontFamily:'Cinzel',fontSize:14.5,color:priority?C.gold:C.textMid}}>{t.priority}</span>
+        </button>
+        <button onClick={()=>setRecurring(!recurring)} style={{flex:1,padding:'9px',borderRadius:7,border:`1px solid ${recurring?C.gold:C.border}`,background:recurring?C.goldFaint:'transparent',cursor:'pointer',display:'flex',alignItems:'center',justifyContent:'center',gap:7}}>
+          <Ic n="repeat" s={19} c={recurring?C.gold:C.textDim}/><span style={{fontFamily:'Cinzel',fontSize:14.5,color:recurring?C.gold:C.textMid}}>{t.recurring}</span>
+        </button>
+      </div>
+      <button onClick={submit} style={{width:'100%',padding:'13px',background:C.gold,border:'none',borderRadius:7,fontFamily:'Cinzel',fontSize:17,letterSpacing:'0.12em',color:C.bg,cursor:'pointer',fontWeight:600,opacity:title.trim()?1:0.4}}>
+        {task?t.editTask:t.addTask}
+      </button>
+    </Modal>
+  );
+}
+
+// ── POMODORO TOAST ────────────────────────────────────────
+function PomoToast({t,C,onClose}){
+  useEffect(()=>{const id=setTimeout(onClose,6000);return()=>clearTimeout(id);},[]);
+  return(
+    <div style={{position:'absolute',top:130,left:16,right:16,zIndex:90,border:`1px solid ${C.gold}`,borderRadius:10,padding:'14px 16px',background:C.surface,animation:'pomodoroAlert 0.5s ease',boxShadow:`0 0 24px ${C.gold}33`}}>
+      <div style={{display:'flex',justifyContent:'space-between',alignItems:'flex-start'}}>
+        <div style={{flex:1}}>
+          <p style={{fontFamily:'Cinzel',fontSize:16,color:C.gold,letterSpacing:'0.1em',marginBottom:6}}>🕯 {t.pomoDone}</p>
+          <p style={{fontFamily:'Spectral',fontStyle:'italic',fontSize:19,color:C.text,lineHeight:1.6}}>{t.pomoVerse}</p>
+          <p style={{fontFamily:'Cinzel',fontSize:14,color:C.textMid,letterSpacing:'0.12em',marginTop:6}}>{t.pomoRef}</p>
+        </div>
+        <div onClick={onClose} style={{cursor:'pointer',opacity:0.5,marginLeft:8,paddingTop:1}}><Ic n="close" s={21} c={C.textMid}/></div>
+      </div>
+    </div>
+  );
+}
+
+// ── TASKS TAB ─────────────────────────────────────────────
+function TasksTab({tasks,verse,onAdd,onEdit,onComplete,onDelete,onTogglePriority,onMove,runningTimer,taskElapsed,onTimerStart,onTimerPause,onTimerStop,t,C,lang,showPomo,onClosePomo,taskSearch,setTaskSearch}){
+  const [showModal,setShowModal]=useState(false);
+  const [editingTask,setEditingTask]=useState(null);
+  // listen to global new-task hotkey event
+  useEffect(()=>{const h=()=>{setEditingTask(null);setShowModal(true);};window.addEventListener('lumen:new-task',h);return()=>window.removeEventListener('lumen:new-task',h);},[]);
+  const q=(taskSearch||'').trim().toLowerCase();
+  const filtered=q?tasks.filter(t=>t.title.toLowerCase().includes(q)):tasks;
+  const sorted=[...filtered.filter(t=>!t.completed&&t.priority),...filtered.filter(t=>!t.completed&&!t.priority),...filtered.filter(t=>t.completed)];
+  const active=sorted.filter(t=>!t.completed);
+  const done=sorted.filter(t=>t.completed);
+  return(
+    <div style={{flex:1,overflowY:'auto',paddingBottom:90}}>
+      <VerseCard verse={verse} C={C} lang={lang}/>
+      {showPomo&&<PomoToast t={t} C={C} onClose={onClosePomo}/>}
+      <div style={{padding:'0 16px'}}>
+        <SL label={t.tasks} right={`${active.length} В СВИТКЕ`} C={C}/>
+        <button onClick={()=>{setEditingTask(null);setShowModal(true);}} style={{width:'100%',padding:'11px',border:`1px solid ${C.border}`,borderRadius:7,background:C.goldFaint,cursor:'pointer',display:'flex',alignItems:'center',justifyContent:'center',gap:7,marginBottom:10}}>
+          <Ic n="plus" s={20} c={C.gold}/><span style={{fontFamily:'Cinzel',fontSize:16,color:C.gold,letterSpacing:'0.12em'}}>{t.newTask}</span>
+        </button>
+        {tasks.length>3&&(
+          <div style={{position:'relative',marginBottom:11}}>
+            <input value={taskSearch} onChange={e=>setTaskSearch(e.target.value)} placeholder={lang==='ru'?'Поиск по делам...':'Search tasks...'}
+              style={{width:'100%',background:'transparent',border:`1px solid ${C.border}`,borderRadius:7,padding:'9px 32px 9px 13px',color:C.text,fontFamily:'Spectral',fontSize:16,letterSpacing:'0.01em'}}/>
+            {taskSearch&&<div onClick={()=>setTaskSearch('')} style={{position:'absolute',right:8,top:'50%',transform:'translateY(-50%)',cursor:'pointer',padding:4,opacity:0.6}}><Ic n="close" s={17} c={C.textMid}/></div>}
+          </div>
+        )}
+        {tasks.length===0?(
+          <div style={{border:`1px dashed ${C.border}`,borderRadius:8,padding:'24px 18px',textAlign:'center'}}>
+            <p style={{fontFamily:'Spectral',fontStyle:'italic',fontSize:19.5,color:C.textMid,lineHeight:1.65}}>{t.emptyTasks}</p>
+          </div>
+        ):(
+          <>
+            {active.map((task,i)=>(
+              <div key={task.id} style={{animationDelay:`${i*0.04}s`}}>
+                <TaskItem task={task} idx={i} total={active.length} onComplete={onComplete} onDelete={onDelete}
+                  onEdit={t=>{setEditingTask(t);setShowModal(true);}}
+                  onTogglePriority={onTogglePriority} onMove={onMove}
+                  isRunning={runningTimer?.taskId===task.id} elapsed={taskElapsed[task.id]||0}
+                  onTimerStart={onTimerStart} onTimerPause={onTimerPause} onTimerStop={onTimerStop} t={t} C={C}/>
+              </div>
+            ))}
+            {done.length>0&&<>
+              <SL label={`${t.completed} · ${done.length}`} C={C}/>
+              {done.map(task=><TaskItem key={task.id} task={task} idx={0} total={1} onComplete={onComplete} onDelete={onDelete} onEdit={()=>{}} onTogglePriority={()=>{}} onMove={()=>{}} isRunning={false} elapsed={0} onTimerStart={()=>{}} onTimerPause={()=>{}} onTimerStop={()=>0} t={t} C={C}/>)}
+            </>}
+          </>
+        )}
+      </div>
+      {showModal&&<TaskModal task={editingTask} onSave={task=>editingTask?onEdit(task):onAdd(task)} onClose={()=>{setShowModal(false);setEditingTask(null);}} t={t} C={C}/>}
+    </div>
+  );
+}
+
+// ── HABIT ITEM ────────────────────────────────────────────
+function HabitItem({habit,onToggle,onEdit,lang,C}){
+  const today=todayKey();
+  const isDone=habit.doneHistory?.includes(today);
+  const streak=calcHabitStreak(habit.doneHistory||[]);
+  const [bounce,setBounce]=useState(false);
+  const weekDays=S[lang].weekDays;
+  // Last 7 days ending today; each cell shows the ACTUAL weekday letter for that date.
+  const weekStatus=Array.from({length:7},(_,i)=>{
+    const d=new Date();d.setDate(d.getDate()-(6-i));
+    const monIdx=(d.getDay()+6)%7;
+    return {done:habit.doneHistory?.includes(dateKey(d)),label:weekDays[monIdx],isToday:i===6};
+  });
+  function handleToggle(){setBounce(true);setTimeout(()=>setBounce(false),500);onToggle(habit.id);}
+  return(
+    <div style={{border:`1px solid ${isDone?C.gold:C.border}`,borderRadius:10,padding:'13px 13px',marginBottom:9,background:isDone?C.goldFaint:'transparent',transition:'all 0.25s',animation:'staggerFadeUp 0.35s ease both'}}>
+      <div style={{display:'flex',alignItems:'center',gap:11}}>
+        <div onClick={handleToggle} style={{width:27,height:27,borderRadius:'50%',border:`2px solid ${isDone?C.gold:C.border}`,background:isDone?C.gold:'transparent',display:'flex',alignItems:'center',justifyContent:'center',cursor:'pointer',flexShrink:0,transition:'all 0.25s',animation:bounce?'habitCheck 0.45s cubic-bezier(0.34,1.56,0.64,1)':'none'}}>
+          {isDone&&<Ic n="check" s={20} c={C.bg}/>}
+        </div>
+        <div style={{flex:1}}>
+          <p style={{fontFamily:'Inter',fontSize:20,color:C.text}}>{habit.name}</p>
+          <div style={{display:'flex',gap:7,marginTop:5}}>
+            {weekStatus.map((s,i)=>(
+              <div key={i} style={{display:'flex',flexDirection:'column',alignItems:'center',gap:2,minWidth:18}}>
+                <div style={{width:6,height:6,borderRadius:'50%',background:s.done?C.gold:C.border,transition:'background 0.2s',boxShadow:s.isToday&&s.done?`0 0 4px ${C.gold}`:'none'}}/>
+                <span style={{fontFamily:'Cinzel',fontSize:11,letterSpacing:'0.02em',color:s.isToday?C.gold:C.textDim,fontWeight:s.isToday?500:400}}>{s.label}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+        <div style={{display:'flex',flexDirection:'column',alignItems:'center',gap:3}}>
+          {streak>0&&<><Ic n="fire" s={22} c={streak>6?C.gold:C.goldDim}/><span style={{fontFamily:'Cinzel',fontSize:15,color:streak>6?C.gold:C.goldDim}}>{streak}</span></>}
+          <div onClick={()=>onEdit(habit)} style={{cursor:'pointer',opacity:0.4,marginTop:2}}><Ic n="edit" s={19} c={C.textMid}/></div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function HabitModal({habit,onSave,onClose,t,C}){
+  const [name,setName]=useState(habit?.name||'');
+  const ref2=useRef();
+  useEffect(()=>ref2.current?.focus({preventScroll:true}),[]);
+  function save(){if(!name.trim())return;onSave(habit?{...habit,name:name.trim()}:{id:Date.now(),name:name.trim(),doneHistory:[]});onClose();}
+  return(
+    <Modal onClose={onClose} title={habit?t.editHabit:t.newHabit} C={C}>
+      <input ref={ref2} value={name} onChange={e=>setName(e.target.value)} onKeyDown={e=>e.key==='Enter'&&save()} placeholder={t.habitPlaceholder}
+        style={{width:'100%',background:'transparent',border:`1px solid ${C.border}`,borderRadius:7,padding:'11px 13px',color:C.text,fontSize:20,marginBottom:18}}/>
+      <button onClick={save} style={{width:'100%',padding:'13px',background:C.gold,border:'none',borderRadius:7,fontFamily:'Cinzel',fontSize:17,letterSpacing:'0.12em',color:C.bg,cursor:'pointer',fontWeight:600,opacity:name.trim()?1:0.4}}>
+        {habit?t.editHabit:t.addHabit}
+      </button>
+    </Modal>
+  );
+}
+
+function HabitsTab({habits,onToggle,onAdd,onEdit,editHabit,t,lang,C}){
+  const [showModal,setShowModal]=useState(false);
+  const [editingHabit,setEditingHabit]=useState(null);
+  const today=todayKey();
+  const doneCount=habits.filter(h=>h.doneHistory?.includes(today)).length;
+  return(
+    <div style={{flex:1,overflowY:'auto',paddingBottom:90}}>
+      <div style={{padding:'0 16px'}}>
+        <SL label={t.habits} right={`${doneCount}/${habits.length}`} C={C}/>
+        {habits.length>0&&<div style={{border:`1px solid ${C.border}`,borderRadius:8,padding:'10px 13px',marginBottom:12,background:C.goldFaint,display:'flex',alignItems:'center',gap:12}}>
+          <div style={{flex:1,height:4,background:C.border,borderRadius:2,overflow:'hidden'}}>
+            <div style={{height:'100%',background:`linear-gradient(to right,${C.goldDim},${C.gold})`,width:`${habits.length>0?doneCount/habits.length*100:0}%`,transition:'width 0.5s ease',borderRadius:2}}/>
+          </div>
+          <span style={{fontFamily:'Cinzel',fontSize:16,color:C.gold,flexShrink:0}}>{habits.length>0?Math.round(doneCount/habits.length*100):0}%</span>
+        </div>}
+        <button onClick={()=>{setEditingHabit(null);setShowModal(true);}} style={{width:'100%',padding:'11px',border:`1px solid ${C.border}`,borderRadius:7,background:C.goldFaint,cursor:'pointer',display:'flex',alignItems:'center',justifyContent:'center',gap:7,marginBottom:12}}>
+          <Ic n="plus" s={20} c={C.gold}/><span style={{fontFamily:'Cinzel',fontSize:16,color:C.gold,letterSpacing:'0.12em'}}>{t.newHabit}</span>
+        </button>
+        {habits.length===0?(
+          <div style={{border:`1px dashed ${C.border}`,borderRadius:8,padding:'24px 18px',textAlign:'center'}}>
+            <p style={{fontFamily:'Spectral',fontStyle:'italic',fontSize:19.5,color:C.textMid,lineHeight:1.65}}>{t.emptyHabits}</p>
+          </div>
+        ):habits.map((h,i)=>(
+          <div key={h.id} style={{animationDelay:`${i*0.06}s`}}>
+            <HabitItem habit={h} onToggle={onToggle} onEdit={h=>{setEditingHabit(h);setShowModal(true);}} lang={lang} C={C}/>
+          </div>
+        ))}
+      </div>
+      {showModal&&<HabitModal habit={editingHabit} onSave={h=>editHabit?editHabit(h):onAdd(h)} onClose={()=>{setShowModal(false);setEditingHabit(null);}} t={t} C={C}/>}
+    </div>
+  );
+}
+
+// ── CHRONICLE TAB ─────────────────────────────────────────
+function HeatMap({habits,lang,C}){
+  if(!habits.length)return null;
+  const weekDays=S[lang].weekDays;
+  const WEEKS=5;
+  // Build a Mon-Sun aligned grid. Last row is the current week (Mon..Sun);
+  // future cells (after today within this week) are drawn faded.
+  const today=new Date();today.setHours(0,0,0,0);
+  const todayKeyStr=dateKey(today);
+  const todayMonIdx=(today.getDay()+6)%7; // 0=Mon..6=Sun
+  const thisMon=new Date(today);thisMon.setDate(thisMon.getDate()-todayMonIdx);
+  const weeks=[];
+  for(let w=0;w<WEEKS;w++){
+    const wkStart=new Date(thisMon);wkStart.setDate(wkStart.getDate()-(WEEKS-1-w)*7);
+    const week=[];
+    for(let d=0;d<7;d++){
+      const day=new Date(wkStart);day.setDate(day.getDate()+d);
+      week.push({key:dateKey(day),isFuture:day.getTime()>today.getTime()});
+    }
+    weeks.push(week);
+  }
+  return(
+    <div style={{border:`1px solid ${C.border}`,borderRadius:12,padding:'14px 14px',marginBottom:11,background:C.goldFaint}}>
+      <p style={{fontFamily:'Cinzel',fontSize:14,color:C.textDim,letterSpacing:'0.12em',marginBottom:10}}>{lang==='ru'?'КАРТА ПРИВЫЧЕК · 5 НЕДЕЛЬ':'HABIT MAP · 5 WEEKS'}</p>
+      <div style={{maxWidth:280,margin:'0 auto'}}>
+        <div style={{display:'flex',gap:3,marginBottom:4}}>
+          {weekDays.map((d,i)=><div key={d} style={{flex:1,textAlign:'center',fontFamily:'Cinzel',fontSize:11,letterSpacing:'0.02em',color:i===todayMonIdx?C.gold:C.textDim,fontWeight:i===todayMonIdx?500:400}}>{d}</div>)}
+        </div>
+        {weeks.map((week,wi)=>(
+          <div key={wi} style={{display:'flex',gap:3,marginBottom:3}}>
+            {week.map(cell=>{
+              if(cell.isFuture)return <div key={cell.key} style={{flex:1,aspectRatio:'1',borderRadius:3,background:'transparent',border:`1px dashed ${C.border}`,opacity:0.4}}/>;
+              const count=habits.filter(h=>h.doneHistory?.includes(cell.key)).length;
+              const ratio=habits.length>0?count/habits.length:0;
+              const isT=cell.key===todayKeyStr;
+              const bg=count===0?C.border:ratio<0.4?`${C.gold}30`:ratio<0.75?C.goldDim:C.gold;
+              return <div key={cell.key} style={{flex:1,aspectRatio:'1',borderRadius:3,background:bg,border:isT?`1.5px solid ${C.gold}`:'none',boxShadow:isT?`0 0 6px ${C.gold}55`:'none',transition:'background 0.3s'}}/>;
+            })}
+          </div>
+        ))}
+      </div>
+      <div style={{display:'flex',alignItems:'center',gap:4,marginTop:10,justifyContent:'center'}}>
+        <span style={{fontFamily:'Cinzel',fontSize:12,color:C.textDim,marginRight:2}}>0</span>
+        {[0,0.3,0.6,1].map((v,i)=><div key={i} style={{width:10,height:10,borderRadius:2,background:v===0?C.border:v<0.4?`${C.gold}30`:v<0.75?C.goldDim:C.gold}}/>)}
+        <span style={{fontFamily:'Cinzel',fontSize:12,color:C.textDim,marginLeft:2}}>100%</span>
+      </div>
+    </div>
+  );
+}
+
+function ChronicleTab({tasks,habits,streak,coins,lang,t,completedCount,maxHabitStreak,totalFocusMin,prayers,almsCount,pomoCount,lectioCount,sabbathCount,themesUsed,tasksByDay,C}){
+  const [achExpanded,setAchExpanded]=useState(null);
+  const today=todayKey();
+  const weekDays=S[lang].weekDays;
+  const todayIdx=new Date().getDay(),adj=todayIdx===0?6:todayIdx-1;
+  const completed=tasks.filter(tk=>tk.completed).length,total=tasks.length;
+  const habitsDoneToday=habits.filter(h=>h.doneHistory?.includes(today)).length;
+  const activity=weekDays.map((_,i)=>{const d=new Date();d.setDate(d.getDate()-(adj-i));return (tasksByDay&&tasksByDay[dateKey(d)])||0;});
+  const achState={streak,coins,completedCount,habitsCount:habits.length,maxHabitStreak,totalFocusMin,prayerDays:(prayers||[]).length,almsCount,pomoCount,lectioCount,sabbathCount,themesUsed};
+  const unlocked=ACHIEVEMENTS.filter(a=>a.check(achState));
+  const locked=ACHIEVEMENTS.filter(a=>!a.check(achState));
+  const rank=getRank(coins);
+  const nextRank=RANKS.find(r=>r.min>coins);
+  return(
+    <div style={{flex:1,overflowY:'auto',padding:'4px 16px 96px'}}>
+      <SL label={t.chronicle} C={C}/>
+      {/* rank card */}
+      <div className="lift" style={{border:`1px solid ${C.gold}`,borderRadius:12,padding:'16px 16px',marginBottom:11,background:C.goldFaint,position:'relative',overflow:'hidden'}}>
+        <div style={{position:'absolute',top:-20,right:-20,fontSize:80,opacity:0.05,lineHeight:1,animation:'softFloat 9s ease-in-out infinite'}}>{rank.icon}</div>
+        <div style={{display:'flex',alignItems:'center',gap:14}}>
+          <div style={{width:44,height:44,borderRadius:10,background:`rgba(201,162,39,0.15)`,border:`1px solid ${C.gold}`,display:'flex',alignItems:'center',justifyContent:'center',fontSize:30,flexShrink:0}}>{rank.icon}</div>
+          <div style={{flex:1}}>
+            <p style={{fontFamily:'Cinzel',fontSize:14,color:C.textMid,letterSpacing:'0.16em',marginBottom:3}}>{lang==='ru'?'ЧИН':'RANK'}</p>
+            <p style={{fontFamily:'Cinzel',fontSize:22,color:C.gold,letterSpacing:'0.08em'}}>{lang==='ru'?rank.title:rank.titleEn}</p>
+            {nextRank&&<div style={{marginTop:8}}>
+              <div style={{height:6,background:C.border,borderRadius:3,overflow:'hidden'}}>
+                <div style={{height:'100%',background:`linear-gradient(to right,${C.goldDim},${C.gold})`,width:`${Math.round((coins-rank.min)/(nextRank.min-rank.min)*100)}%`,borderRadius:3,transition:'width 0.6s ease',boxShadow:`0 0 8px ${C.gold}66`}}/>
+              </div>
+              <p style={{fontFamily:'Cinzel',fontSize:14,color:C.textDim,marginTop:4,letterSpacing:'0.08em'}}>{coins} / {nextRank.min} → {lang==='ru'?nextRank.title:nextRank.titleEn}</p>
+            </div>}
+          </div>
+        </div>
+        <p style={{fontFamily:'Spectral',fontStyle:'italic',fontSize:18,color:C.textMid,marginTop:12,lineHeight:1.55}}>{rank.verse}</p>
+        <p style={{fontFamily:'Cinzel',fontSize:14,color:C.goldDim,marginTop:5,letterSpacing:'0.1em'}}>{rank.ref}</p>
+      </div>
+      {/* progress ring */}
+      <div className="lift" style={{border:`1px solid ${C.border}`,borderRadius:12,padding:'16px 16px',marginBottom:11,background:C.goldFaint,display:'flex',alignItems:'center',gap:16}}>
+        <svg width={64} height={64} style={{flexShrink:0}}>
+          <circle cx={32} cy={32} r={24} fill="none" stroke={C.border} strokeWidth={4}/>
+          <circle cx={32} cy={32} r={24} fill="none" stroke={C.gold} strokeWidth={4} strokeDasharray={`${total>0?completed/total*151:0} 151`} strokeLinecap="round" transform="rotate(-90 32 32)" style={{transition:'stroke-dasharray 0.6s ease'}}/>
+          <text x={32} y={36} textAnchor="middle" fontSize={14} fill={C.text} fontFamily="Cinzel">{total>0?Math.round(completed/total*100):0}%</text>
+        </svg>
+        <div>
+          <p style={{fontFamily:'Cinzel',fontSize:17,color:C.text,marginBottom:4}}>{t.progress}</p>
+          <p style={{fontFamily:'Inter',fontSize:17.5,color:C.textMid}}>{completed} / {total} {t.tasks.toLowerCase()}</p>
+          <p style={{fontFamily:'Inter',fontSize:17.5,color:C.textMid,marginTop:2}}>{habitsDoneToday} / {habits.length} {t.habits.toLowerCase()}</p>
+        </div>
+      </div>
+      {/* weekly bars */}
+      {(()=>{const maxV=Math.max(...activity,1),CHART_H=88;return(
+      <div className="lift" style={{border:`1px solid ${C.border}`,borderRadius:12,padding:'14px 16px 12px',marginBottom:11,background:C.goldFaint}}>
+        <p style={{fontFamily:'Cinzel',fontSize:14,color:C.textDim,letterSpacing:'0.12em',marginBottom:12}}>{lang==='ru'?'ЗАДАЧИ · 7 ДНЕЙ':'TASKS · 7 DAYS'}</p>
+        <div style={{display:'flex',justifyContent:'space-between',alignItems:'flex-end',height:CHART_H,gap:6}}>
+          {weekDays.map((day,i)=>{const isT=i===adj,v=activity[i],h=v>0?Math.max(10,Math.round(v/maxV*(CHART_H-6))):4;return(<div key={day} style={{flex:1,display:'flex',flexDirection:'column',alignItems:'center',justifyContent:'flex-end',height:'100%',gap:6}}>
+            {v>0&&<span style={{fontFamily:'Cinzel',fontSize:12,color:isT?C.gold:C.textDim,marginBottom:-2}}>{v}</span>}
+            <div style={{width:'78%',maxWidth:30,height:h,borderRadius:4,transition:'height 0.5s cubic-bezier(0.34,1.56,0.64,1)',background:isT?`linear-gradient(to top,${C.goldDim},${C.gold})`:v>0?C.goldDim:C.border,boxShadow:isT?`0 0 8px ${C.gold}55`:'none'}}/>
+          </div>);
+          })}
+        </div>
+        <div style={{display:'flex',justifyContent:'space-between',marginTop:6,gap:6}}>
+          {weekDays.map((day,i)=>{const isT=i===adj;return(<span key={day} style={{flex:1,textAlign:'center',fontFamily:'Cinzel',fontSize:14,color:isT?C.gold:C.textDim,letterSpacing:'0.06em',fontWeight:isT?500:400}}>{day}</span>);})}
+        </div>
+      </div>);})()}
+      {/* heatmap */}
+      <HeatMap habits={habits} lang={lang} C={C}/>
+      {/* stats grid */}
+      <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:9,marginBottom:14}}>
+        {[{l:t.streak,v:`${streak} ${t.days}`,n:'fire'},{l:t.coins,v:coins,n:'coin'},{l:t.tasks,v:total,n:'tasks'},{l:t.habits,v:habits.length,n:'habits'}].map(item=>(
+          <div key={item.l} className="lift" style={{border:`1px solid ${C.border}`,borderRadius:10,padding:'12px',background:C.goldFaint}}>
+            <Ic n={item.n} s={21} c={C.goldDim}/><p style={{fontFamily:'Cinzel',fontSize:28,color:C.text,marginTop:4}}>{item.v}</p>
+            <p style={{fontFamily:'Cinzel',fontSize:14,color:C.textDim,letterSpacing:'0.12em',marginTop:2}}>{item.l}</p>
+          </div>
+        ))}
+      </div>
+      {/* achievements */}
+      <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',marginBottom:8}}>
+        <span style={{fontFamily:'Cinzel',fontSize:15.5,color:C.textMid,letterSpacing:'0.14em'}}>ЗАВЕТЫ</span>
+        <span style={{fontFamily:'Cinzel',fontSize:14,color:C.goldDim}}>{unlocked.length}/{ACHIEVEMENTS.length}</span>
+      </div>
+      <div style={{height:3,background:C.border,borderRadius:2,marginBottom:12,overflow:'hidden'}}>
+        <div style={{height:'100%',background:`linear-gradient(to right,${C.goldDim},${C.gold})`,width:`${unlocked.length/ACHIEVEMENTS.length*100}%`,borderRadius:2,transition:'width 0.6s ease'}}/>
+      </div>
+      {unlocked.map((a,i)=>{const isE=achExpanded===a.id;return(
+        <div key={a.id} onClick={()=>setAchExpanded(isE?null:a.id)} className="lift" style={{border:`1px solid ${C.gold}`,borderRadius:10,padding:'12px 13px',marginBottom:8,background:'rgba(201,162,39,0.07)',cursor:'pointer',animation:'staggerFadeUp 0.4s ease both',animationDelay:`${i*0.06}s`}}>
+          <div style={{display:'flex',alignItems:'center',gap:11}}>
+            <div style={{width:32,height:32,borderRadius:7,background:'rgba(201,162,39,0.13)',border:`1px solid ${C.gold}`,display:'flex',alignItems:'center',justifyContent:'center',fontSize:21,flexShrink:0}}>{a.icon}</div>
+            <div style={{flex:1}}><p style={{fontFamily:'Cinzel',fontSize:17.5,color:C.gold,letterSpacing:'0.05em'}}>{lang==='ru'?a.title:a.titleEn}</p><p style={{fontFamily:'Inter',fontSize:16.5,color:C.textMid,marginTop:2}}>{lang==='ru'?a.desc:a.descEn}</p></div>
+            <div style={{width:5,height:5,borderRadius:'50%',background:C.gold,boxShadow:`0 0 6px ${C.gold}`,flexShrink:0}}/>
+          </div>
+          {isE&&<div style={{marginTop:10,paddingTop:10,borderTop:`1px solid ${C.gold}22`}}>
+            <p style={{fontFamily:'Spectral',fontStyle:'italic',fontSize:18.5,color:C.text,lineHeight:1.65,marginBottom:5}}>{a.verse}</p>
+            <p style={{fontFamily:'Cinzel',fontSize:14,color:C.goldDim,letterSpacing:'0.12em'}}>{a.ref}</p>
+          </div>}
+        </div>
+      );})}
+      {locked.map(a=>(
+        <div key={a.id} style={{border:`1px solid ${C.border}`,borderRadius:10,padding:'12px 13px',marginBottom:8,opacity:0.5,display:'flex',alignItems:'center',gap:11}}>
+          <div style={{width:32,height:32,borderRadius:7,background:'transparent',border:`1px solid ${C.border}`,display:'flex',alignItems:'center',justifyContent:'center',flexShrink:0}}><Ic n="lock" s={20} c={C.textDim}/></div>
+          <div><p style={{fontFamily:'Cinzel',fontSize:17,color:C.textDim,letterSpacing:'0.05em'}}>{lang==='ru'?a.title:a.titleEn}</p><p style={{fontFamily:'Inter',fontSize:16.5,color:C.textDim,marginTop:2}}>{lang==='ru'?a.desc:a.descEn}</p></div>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+// ── REWARDS TAB ───────────────────────────────────────────
+function RewardsTab({coins,onSpend,lang,t,C}){
+  const [flash,setFlash]=useState(null);
+  const [expanded,setExpanded]=useState(null);
+  const pct=Math.min(100,Math.round(coins/400*100));
+  function buy(r){if(coins<r.cost)return;onSpend(r.cost,r);setFlash(r.id);setTimeout(()=>setFlash(null),1200);}
+  return(
+    <div style={{flex:1,overflowY:'auto',padding:'4px 16px 96px'}}>
+      <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',padding:'16px 0 4px'}}>
+        <span style={{fontFamily:'Cinzel',fontSize:15.5,color:C.textMid,letterSpacing:'0.14em'}}>{t.rewards}</span>
+        <div style={{display:'flex',alignItems:'center',gap:5}}><Ic n="coin" s={20} c={C.gold}/><span style={{fontFamily:'Cinzel',fontSize:21,color:C.gold,fontWeight:500}}>{coins}</span></div>
+      </div>
+      <div style={{border:`1px solid ${C.border}`,borderRadius:8,padding:'12px 14px',marginBottom:15,background:C.goldFaint}}>
+        <p style={{fontFamily:'Spectral',fontStyle:'italic',fontSize:18.5,color:C.textMid,marginBottom:8}}>«Рука прилежных будет господствовать.»</p>
+        <div style={{height:4,background:C.border,borderRadius:2,overflow:'hidden'}}>
+          <div style={{height:'100%',borderRadius:2,background:`linear-gradient(to right,${C.goldDim},${C.gold})`,width:`${pct}%`,transition:'width 0.6s cubic-bezier(0.34,1.56,0.64,1)'}}/>
+        </div>
+        <div style={{display:'flex',justifyContent:'space-between',marginTop:5}}>
+          <span style={{fontFamily:'Cinzel',fontSize:14,color:C.textDim,letterSpacing:'0.08em'}}>{coins} МОНЕТ</span>
+          <span style={{fontFamily:'Cinzel',fontSize:14,color:C.textDim,letterSpacing:'0.08em'}}>{pct}% ОТ КАЗНЫ</span>
+        </div>
+      </div>
+      {Object.keys(REWARD_CATS).map(cat=>{
+        const catR=REWARDS.filter(r=>r.cat===cat),ci=REWARD_CATS[cat];
+        return(<div key={cat} style={{marginBottom:16}}>
+          <div style={{display:'flex',alignItems:'center',gap:8,marginBottom:9}}>
+            <div style={{height:1,flex:1,background:`linear-gradient(to right,${ci.color}44,transparent)`}}/>
+            <span style={{fontFamily:'Cinzel',fontSize:14,color:ci.color,letterSpacing:'0.16em'}}>{lang==='ru'?ci.label:ci.labelEn}</span>
+            <div style={{height:1,flex:1,background:`linear-gradient(to left,${ci.color}44,transparent)`}}/>
+          </div>
+          {catR.map(r=>{
+            const can=coins>=r.cost,isF=flash===r.id,isE=expanded===r.id;
+            return(<div key={r.id} onClick={()=>setExpanded(isE?null:r.id)} className={can?'lift':''} style={{border:`1px solid ${isF?C.gold:can?C.border:'rgba(90,78,56,0.2)'}`,borderRadius:10,padding:'13px 13px',marginBottom:8,cursor:'pointer',background:isF?`${C.gold}18`:C.goldFaint,transition:'all 0.25s',opacity:can?1:0.55,animation:isF?'badgeGlow 1s ease':'none'}}>
+              <div style={{display:'flex',alignItems:'center',gap:11}}>
+                <div style={{width:36,height:36,borderRadius:8,background:`linear-gradient(135deg,${C.gold}18,${C.gold}06)`,border:`1px solid ${can?C.border:'rgba(90,78,56,0.25)'}`,display:'flex',alignItems:'center',justifyContent:'center',fontSize:21,fontFamily:'Cinzel',color:can?C.gold:C.goldDim,flexShrink:0}}>{r.icon}</div>
+                <div style={{flex:1,minWidth:0}}>
+                  <p style={{fontFamily:'Cinzel',fontSize:18,color:can?C.text:C.textDim,letterSpacing:'0.03em'}}>{lang==='ru'?r.name:r.nameEn}</p>
+                  <p style={{fontFamily:'Inter',fontSize:16.5,color:C.textMid,marginTop:2}}>{lang==='ru'?r.desc:r.descEn}</p>
+                </div>
+                <button onClick={e=>{e.stopPropagation();buy(r);}} disabled={!can} style={{display:'flex',flexDirection:'column',alignItems:'center',gap:1,padding:'8px 12px',borderRadius:7,border:`1px solid ${can?C.gold:C.border}`,background:can?`${C.gold}18`:'transparent',cursor:can?'pointer':'not-allowed'}}>
+                  <span style={{fontFamily:'Cinzel',fontSize:19,color:can?C.gold:C.textDim,fontWeight:500}}>{r.cost}</span>
+                  <span style={{fontFamily:'Cinzel',fontSize:13.5,color:can?C.goldDim:C.textDim,letterSpacing:'0.1em'}}>МОН.</span>
+                </button>
+              </div>
+              {isE&&<div style={{marginTop:11,paddingTop:11,borderTop:`1px solid ${C.gold}22`,animation:'fadeUp 0.2s ease'}}>
+                <p style={{fontFamily:'Spectral',fontStyle:'italic',fontSize:18.5,color:C.text,lineHeight:1.65,marginBottom:5}}>{r.verse}</p>
+                <p style={{fontFamily:'Cinzel',fontSize:14,color:C.goldDim,letterSpacing:'0.12em'}}>{r.ref}</p>
+              </div>}
+            </div>);
+          })}
+        </div>);
+      })}
+    </div>
+  );
+}
+
+// ── SCRIPTURE + PRAYER ────────────────────────────────────
+function ScriptureTab({t,C,lang,prayerText,prayerSaved,prayers,setPrayers,onPrayerChange,onPrayerSave,onPrayerClear,onLectioComplete}){
+  const [active,setActive]=useState(null);
+  const [showPrayer,setShowPrayer]=useState(false);
+  const [showHistory,setShowHistory]=useState(false);
+  const [randomVerse,setRandomVerse]=useState(null);
+  const [lectioStage,setLectioStage]=useState(0);
+  function pickRandom(){let v;do{v=VERSES[Math.floor(Math.random()*VERSES.length)];}while(VERSES.length>1&&randomVerse&&v.text===randomVerse.text);setRandomVerse(v);setLectioStage(0);}
+  function deletePrayer(idx){setPrayers(p=>p.filter((_,i)=>i!==idx));}
+  function nextLectio(){if(lectioStage<3)setLectioStage(s=>s+1);else{setLectioStage(0);if(onLectioComplete)onLectioComplete();}}
+  const stages=LECTIO_STAGES[lang];
+  return(
+    <div style={{flex:1,overflowY:'auto',padding:'4px 16px 96px'}}>
+      {/* random verse card */}
+      <div style={{border:`1px solid ${C.gold}`,borderRadius:10,padding:'14px 16px',marginTop:12,marginBottom:12,background:C.goldFaint}}>
+        <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',marginBottom:randomVerse?9:0}}>
+          <span style={{fontFamily:'Cinzel',fontSize:14,color:C.gold,letterSpacing:'0.12em'}}>{lang==='ru'?'СЛОВО МОМЕНТА':'WORD OF THE MOMENT'}</span>
+          <button onClick={pickRandom} style={{background:'transparent',border:`1px solid ${C.gold}`,borderRadius:6,padding:'5px 11px',color:C.gold,fontFamily:'Cinzel',fontSize:13,letterSpacing:'0.1em',cursor:'pointer'}}>
+            {randomVerse?(lang==='ru'?'ЕЩЁ':'AGAIN'):(lang==='ru'?'ОТКРЫТЬ':'REVEAL')}
+          </button>
+        </div>
+        {randomVerse&&(
+          <div style={{animation:'fadeIn 0.4s ease'}}>
+            <p style={{fontFamily:'Spectral',fontStyle:'italic',fontSize:18.5,color:C.text,lineHeight:1.65,marginBottom:8}}>{randomVerse.text}</p>
+            <p style={{fontFamily:'Cinzel',fontSize:13.5,color:C.goldDim,letterSpacing:'0.12em',marginBottom:12}}>{randomVerse.ref}</p>
+            {/* Lectio Divina */}
+            <div style={{borderTop:`1px solid ${C.border}`,paddingTop:10,marginTop:6}}>
+              <div style={{display:'flex',gap:4,marginBottom:9}}>
+                {stages.map((_,i)=>(
+                  <div key={i} style={{flex:1,height:3,borderRadius:2,background:i<=lectioStage?C.gold:C.border,transition:'background 0.3s ease'}}/>
+                ))}
+              </div>
+              <p style={{fontFamily:'Cinzel',fontSize:12,color:C.goldDim,letterSpacing:'0.18em',marginBottom:3}}>{stages[lectioStage].label} · {lectioStage+1}/4</p>
+              <p style={{fontFamily:'Cinzel',fontSize:16,color:C.gold,letterSpacing:'0.1em',marginBottom:5}}>{stages[lectioStage].title}</p>
+              <p style={{fontFamily:'Spectral',fontStyle:'italic',fontSize:15.5,color:C.textMid,lineHeight:1.6,marginBottom:9}}>{stages[lectioStage].hint}</p>
+              <button onClick={nextLectio} style={{width:'100%',padding:'9px',borderRadius:6,border:'none',background:C.gold,fontFamily:'Cinzel',fontSize:13,letterSpacing:'0.14em',color:C.bg,cursor:'pointer',fontWeight:600}}>
+                {lectioStage<3?(lang==='ru'?'ДАЛЕЕ →':'NEXT →'):(lang==='ru'?'✓ ЗАВЕРШИТЬ':'✓ COMPLETE')}
+              </button>
+            </div>
+          </div>
+        )}
+      </div>
+      {/* prayer journal button */}
+      <div onClick={()=>setShowPrayer(!showPrayer)} style={{border:`1px solid ${showPrayer?C.gold:C.border}`,borderRadius:10,padding:'14px 14px',marginBottom:12,background:showPrayer?C.goldFaint:'transparent',cursor:'pointer',transition:'all 0.25s'}}>
+        <div style={{display:'flex',alignItems:'center',gap:10}}>
+          <div style={{width:30,height:30,borderRadius:7,background:C.goldFaint,border:`1px solid ${C.border}`,display:'flex',alignItems:'center',justifyContent:'center',flexShrink:0}}>
+            <Ic n="prayer" s={22} c={C.gold}/>
+          </div>
+          <div style={{flex:1}}>
+            <p style={{fontFamily:'Cinzel',fontSize:17,color:C.gold,letterSpacing:'0.08em'}}>{t.prayerTitle}</p>
+            <p style={{fontFamily:'Spectral',fontStyle:'italic',fontSize:17.5,color:C.textMid,marginTop:2}}>{t.prayerVerse}</p>
+          </div>
+          {prayerSaved&&<div style={{width:6,height:6,borderRadius:'50%',background:C.gold,flexShrink:0}}/>}
+        </div>
+        {showPrayer&&(
+          <div style={{marginTop:14}} onClick={e=>e.stopPropagation()}>
+            <div style={{border:`1px solid ${C.border}`,borderRadius:8,padding:'1px',background:C.surface}}>
+              <textarea value={prayerText} onChange={e=>onPrayerChange(e.target.value)}
+                placeholder={t.prayerPlaceholder}
+                style={{width:'100%',minHeight:110,background:'transparent',border:'none',padding:'12px 13px',color:C.text,fontFamily:'Spectral',fontSize:20,lineHeight:1.7,resize:'none',letterSpacing:'0.01em'}}/>
+            </div>
+            <div style={{display:'flex',gap:8,marginTop:10}}>
+              <button onClick={onPrayerClear} style={{flex:1,padding:'10px',borderRadius:7,border:`1px solid ${C.border}`,background:'transparent',fontFamily:'Cinzel',fontSize:15,color:C.textMid,cursor:'pointer',letterSpacing:'0.1em'}}>
+                {t.prayerClear}
+              </button>
+              <button onClick={onPrayerSave} style={{flex:2,padding:'10px',borderRadius:7,border:'none',background:C.gold,fontFamily:'Cinzel',fontSize:15,color:C.bg,cursor:'pointer',letterSpacing:'0.12em',fontWeight:600,opacity:prayerText.trim()?1:0.4}}>
+                {prayerSaved?`✓ ${t.prayerDone}`:t.prayerSave}
+              </button>
+            </div>
+            <p style={{fontFamily:'Cinzel',fontSize:14,color:C.textDim,textAlign:'center',marginTop:8,letterSpacing:'0.1em'}}>{t.prayerRef} · {lang==='ru'?'Завтра уйдёт в архив':'Will move to archive tomorrow'}</p>
+          </div>
+        )}
+      </div>
+      {/* prayer history */}
+      {prayers&&prayers.length>0&&(
+        <>
+          <div onClick={()=>setShowHistory(!showHistory)} style={{display:'flex',justifyContent:'space-between',alignItems:'center',padding:'10px 4px',cursor:'pointer',marginBottom:6}}>
+            <span style={{fontFamily:'Cinzel',fontSize:14,color:C.textMid,letterSpacing:'0.14em'}}>{lang==='ru'?`АРХИВ МОЛИТВ · ${prayers.length}`:`PRAYER ARCHIVE · ${prayers.length}`}</span>
+            <Ic n={showHistory?'up':'down'} s={17} c={C.textDim}/>
+          </div>
+          {showHistory&&(
+            <div style={{marginBottom:14}}>
+              {prayers.map((p,i)=>(
+                <div key={`${p.date}-${i}`} style={{border:`1px solid ${C.border}`,borderRadius:8,padding:'10px 13px',marginBottom:7,background:C.goldFaint,animation:'fadeIn 0.25s ease'}}>
+                  <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',marginBottom:6}}>
+                    <span style={{fontFamily:'Cinzel',fontSize:13,color:C.goldDim,letterSpacing:'0.12em'}}>{fmtDateShort(p.date,lang).toUpperCase()}</span>
+                    <div onClick={()=>deletePrayer(i)} style={{cursor:'pointer',opacity:0.4,padding:2}}><Ic n="trash" s={14} c={C.textMid}/></div>
+                  </div>
+                  <p style={{fontFamily:'Spectral',fontSize:16,color:C.text,lineHeight:1.55,whiteSpace:'pre-wrap'}}>{p.text}</p>
+                </div>
+              ))}
+            </div>
+          )}
+        </>
+      )}
+      {/* verses */}
+      <SL label={t.scripture} C={C}/>
+      {VERSES.map((v,i)=>(
+        <div key={i} onClick={()=>setActive(active===i?null:i)} style={{border:`1px solid ${active===i?C.gold:C.border}`,borderRadius:10,padding:'16px 16px',cursor:'pointer',background:active===i?C.goldFaint:'transparent',transition:'all 0.22s',marginBottom:10}}>
+          <p style={{fontFamily:'Spectral',fontStyle:'italic',fontSize:active===i?19:17.5,color:C.text,lineHeight:1.7}}>{v.text}</p>
+          <p style={{fontFamily:'Cinzel',fontSize:14.5,color:active===i?C.gold:C.goldDim,letterSpacing:'0.14em',marginTop:10}}>{v.ref}</p>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+// ── SUNDAY REVIEW ─────────────────────────────────────────
+function SundayReview({onClose,onSave,t,C,lang,tasksByDay,habits,prayers,coins,todayCoins,streak,totalFocusMin,weeklyReflections}){
+  const [reflection,setReflection]=useState('');
+  const [showHistory,setShowHistory]=useState(false);
+
+  // Compute past 7 days (incl. today, which is Sunday)
+  const stats=useMemo(()=>{
+    const today=new Date();
+    let tasksDone=0,habitsKept=0,prayerDays=0;
+    const days=[];
+    for(let i=6;i>=0;i--){
+      const d=new Date(today);d.setDate(d.getDate()-i);
+      const k=dateKey(d);
+      const tCount=tasksByDay[k]||0;
+      tasksDone+=tCount;
+      days.push({key:k,count:tCount,label:t.weekDays[(d.getDay()+6)%7]});
+      if(prayers.some(p=>p.date===k))prayerDays++;
+    }
+    // Habits: how many habit-days were checked over past 7 days
+    habits.forEach(h=>{const hist=h.doneHistory||[];days.forEach(d=>{if(hist.includes(d.key))habitsKept++;});});
+    return {tasksDone,habitsKept,prayerDays,days};
+  },[tasksByDay,habits,prayers,t]);
+
+  const maxV=Math.max(...stats.days.map(d=>d.count),1),CHART_H=70;
+
+  function handleSave(){
+    const txt=reflection.trim();
+    if(txt){
+      onSave({date:todayKey(),text:txt,stats:{tasksDone:stats.tasksDone,habitsKept:stats.habitsKept,prayerDays:stats.prayerDays}});
+    }
+    onClose(true);
+  }
+
+  return(
+    <div style={{position:'fixed',inset:0,background:'rgba(0,0,0,0.78)',zIndex:200,display:'flex',alignItems:'center',justifyContent:'center',padding:'20px',animation:'fadeIn 0.4s ease',backdropFilter:'blur(3px)'}}>
+      <div style={{background:C.bg,border:`1px solid ${C.gold}`,borderRadius:14,padding:'24px 22px 20px',maxWidth:520,width:'100%',maxHeight:'92vh',overflowY:'auto',boxShadow:`0 0 60px ${C.gold}33`,animation:'onboardReveal 0.55s cubic-bezier(0.22,1,0.36,1)'}}>
+        {/* Header */}
+        <div style={{textAlign:'center',marginBottom:18}}>
+          <div style={{fontFamily:'Cinzel',fontSize:34,color:C.gold,marginBottom:4,opacity:0.9}}>☩</div>
+          <p style={{fontFamily:'Cinzel',fontSize:18,color:C.gold,letterSpacing:'0.18em',marginBottom:5}}>{t.sundayTitle}</p>
+          <p style={{fontFamily:'Spectral',fontStyle:'italic',fontSize:14.5,color:C.textMid}}>{t.sundaySubtitle}</p>
+        </div>
+
+        {/* Verse */}
+        <div style={{borderTop:`1px solid ${C.border}`,borderBottom:`1px solid ${C.border}`,padding:'12px 4px',marginBottom:16,textAlign:'center'}}>
+          <p style={{fontFamily:'Spectral',fontStyle:'italic',fontSize:16,color:C.text,lineHeight:1.55,marginBottom:5}}>{t.sundayVerse}</p>
+          <p style={{fontFamily:'Cinzel',fontSize:13,color:C.goldDim,letterSpacing:'0.12em'}}>{t.sundayRef}</p>
+        </div>
+
+        {/* Mini chart of the week */}
+        <div style={{marginBottom:16}}>
+          <p style={{fontFamily:'Cinzel',fontSize:13,color:C.textDim,letterSpacing:'0.12em',marginBottom:9}}>{t.sundayWeek}</p>
+          <div style={{display:'flex',alignItems:'flex-end',height:CHART_H,gap:6}}>
+            {stats.days.map((d,i)=>{const isLast=i===stats.days.length-1;const h=d.count>0?Math.max(8,Math.round(d.count/maxV*(CHART_H-6))):3;return(
+              <div key={d.key} style={{flex:1,display:'flex',flexDirection:'column',alignItems:'center',gap:4}}>
+                {d.count>0&&<span style={{fontFamily:'Cinzel',fontSize:11,color:isLast?C.gold:C.textDim}}>{d.count}</span>}
+                <div style={{width:'72%',maxWidth:26,height:h,borderRadius:3,background:isLast?`linear-gradient(to top,${C.goldDim},${C.gold})`:d.count>0?C.goldDim:C.border,boxShadow:isLast?`0 0 6px ${C.gold}55`:'none'}}/>
+              </div>);
+            })}
+          </div>
+          <div style={{display:'flex',marginTop:4,gap:6}}>
+            {stats.days.map((d,i)=>(<span key={d.key} style={{flex:1,textAlign:'center',fontFamily:'Cinzel',fontSize:12,color:i===stats.days.length-1?C.gold:C.textDim,letterSpacing:'0.06em'}}>{d.label}</span>))}
+          </div>
+        </div>
+
+        {/* Stats grid */}
+        <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:8,marginBottom:16}}>
+          {[
+            {l:t.sundayTasksDone,v:stats.tasksDone},
+            {l:t.sundayHabitsKept,v:stats.habitsKept},
+            {l:t.sundayPrayerDays,v:`${stats.prayerDays} / 7`},
+            {l:t.streak,v:`${streak} ${t.days}`},
+          ].map(it=>(
+            <div key={it.l} style={{border:`1px solid ${C.border}`,borderRadius:8,padding:'10px 12px',background:C.goldFaint}}>
+              <p style={{fontFamily:'Cinzel',fontSize:24,color:C.text}}>{it.v}</p>
+              <p style={{fontFamily:'Cinzel',fontSize:11,color:C.textDim,letterSpacing:'0.1em',marginTop:2}}>{it.l}</p>
+            </div>
+          ))}
+        </div>
+
+        {/* Reflection input */}
+        <div style={{marginBottom:14}}>
+          <p style={{fontFamily:'Cinzel',fontSize:12,color:C.textDim,letterSpacing:'0.12em',marginBottom:7}}>{t.sundayReflectLabel}</p>
+          <textarea value={reflection} onChange={e=>setReflection(e.target.value)} placeholder={t.sundayReflectPlaceholder}
+            style={{width:'100%',minHeight:100,padding:'11px 12px',background:C.surface,border:`1px solid ${C.border}`,borderRadius:7,color:C.text,fontFamily:'Spectral',fontSize:15,lineHeight:1.5,resize:'vertical',outline:'none'}}
+            onFocus={e=>e.target.style.borderColor=C.gold} onBlur={e=>e.target.style.borderColor=C.border}/>
+        </div>
+
+        {/* History toggle */}
+        {weeklyReflections.length>0&&(
+          <div style={{marginBottom:14}}>
+            <button onClick={()=>setShowHistory(s=>!s)} style={{background:'transparent',border:'none',color:C.goldDim,fontFamily:'Cinzel',fontSize:12,letterSpacing:'0.12em',cursor:'pointer',padding:'4px 0'}}>
+              {showHistory?'▾':'▸'} {t.sundayHistoryTitle} ({weeklyReflections.length})
+            </button>
+            {showHistory&&(
+              <div style={{marginTop:8,maxHeight:160,overflowY:'auto',paddingRight:6}}>
+                {weeklyReflections.slice().reverse().map(r=>(
+                  <div key={r.date} style={{borderLeft:`2px solid ${C.gold}`,paddingLeft:10,marginBottom:10}}>
+                    <p style={{fontFamily:'Cinzel',fontSize:11,color:C.goldDim,letterSpacing:'0.1em',marginBottom:3}}>{r.date}</p>
+                    <p style={{fontFamily:'Spectral',fontSize:14,color:C.textMid,lineHeight:1.5,whiteSpace:'pre-wrap'}}>{r.text}</p>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+        )}
+
+        {/* Actions */}
+        <div style={{display:'flex',gap:8,marginTop:6}}>
+          <button onClick={()=>onClose(false)} style={{flex:1,padding:'11px',background:'transparent',border:`1px solid ${C.border}`,borderRadius:7,color:C.textMid,fontFamily:'Cinzel',fontSize:13,letterSpacing:'0.14em',cursor:'pointer'}}>{t.sundayLater}</button>
+          <button onClick={handleSave} style={{flex:2,padding:'11px',background:`linear-gradient(135deg,${C.goldDim},${C.gold})`,border:'none',borderRadius:7,color:C.bg,fontFamily:'Cinzel',fontSize:13,letterSpacing:'0.14em',cursor:'pointer',fontWeight:600,boxShadow:`0 0 12px ${C.gold}44`}}>{reflection.trim()?t.sundaySave:t.sundayClose}</button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ── SETTINGS ──────────────────────────────────────────────
+function SettingsOverlay({onClose,lang,setLang,getExportData,onImport,onReset,themeMode,setThemeMode,themeName,t,C}){
+  const fileRef=useRef();
+  const [msg,setMsg]=useState('');
+  function handleExport(){const b=new Blob([getExportData()],{type:'application/json'});const u=URL.createObjectURL(b);const a=document.createElement('a');a.href=u;a.download='lumen-backup.json';a.click();URL.revokeObjectURL(u);}
+  function handleImport(e){const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=ev=>{try{onImport(JSON.parse(ev.target.result));setMsg(t.importSuccess);}catch{setMsg(t.importError);}};r.readAsText(f);}
+  function handleReset(){if(window.confirm(t.resetConfirm))onReset();}
+  function openExternal(url){
+    try{
+      const inv=window.__TAURI__?.core?.invoke||window.__TAURI_INTERNALS__?.invoke;
+      if(inv){inv('plugin:opener|open_url',{url});return;}
+    }catch{}
+    try{window.open(url,'_blank','noopener,noreferrer');}catch{}
+  }
+  const themeKeys=['auto','night','dawn','day','dusk'];
+  const themeLabels={auto:'Авто',night:'Ночь',dawn:'Рассвет',day:'День',dusk:'Закат'};
+  return(
+    <div style={{position:'absolute',inset:0,zIndex:200,background:'rgba(0,0,0,0.7)',display:'flex',flexDirection:'column',justifyContent:'flex-end',animation:'fadeIn 0.2s ease',willChange:'opacity'}}>
+      <div style={{background:C.surface,backdropFilter:'blur(18px)',WebkitBackdropFilter:'blur(18px)',borderTop:`1px solid ${C.border}`,borderRadius:'20px 20px 0 0',padding:'22px 20px 44px',maxHeight:'82%',overflowY:'auto',willChange:'transform'}}>
+        <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',marginBottom:20}}>
+          <span style={{fontFamily:'Cinzel',fontSize:19,color:C.text,letterSpacing:'0.12em'}}>{t.settings}</span>
+          <div onClick={onClose} style={{cursor:'pointer',opacity:0.6}}><Ic n="close" s={26} c={C.textMid}/></div>
+        </div>
+        {/* language */}
+        <p style={{fontFamily:'Cinzel',fontSize:14,color:C.textDim,letterSpacing:'0.12em',marginBottom:9}}>{t.language}</p>
+        <div style={{display:'flex',gap:8,marginBottom:20}}>
+          {['ru','en'].map(l=>(
+            <button key={l} onClick={()=>setLang(l)} style={{flex:1,padding:'11px',borderRadius:8,border:`1px solid ${lang===l?C.gold:C.border}`,background:lang===l?C.goldFaint:'transparent',fontFamily:'Cinzel',fontSize:18,letterSpacing:'0.1em',color:lang===l?C.gold:C.textMid,cursor:'pointer'}}>
+              {l==='ru'?'РУССКИЙ':'ENGLISH'}
+            </button>
+          ))}
+        </div>
+        {/* theme */}
+        <p style={{fontFamily:'Cinzel',fontSize:14,color:C.textDim,letterSpacing:'0.12em',marginBottom:9}}>{t.theme}</p>
+        <div style={{display:'flex',gap:6,marginBottom:20,flexWrap:'wrap'}}>
+          {themeKeys.map(k=>(
+            <button key={k} onClick={()=>setThemeMode(k)} style={{flex:1,minWidth:58,padding:'9px 4px',borderRadius:7,border:`1px solid ${themeMode===k?C.gold:C.border}`,background:themeMode===k?C.goldFaint:'transparent',fontFamily:'Cinzel',fontSize:14,letterSpacing:'0.08em',color:themeMode===k?C.gold:C.textMid,cursor:'pointer'}}>
+              {lang==='ru'?(k==='auto'?'Авто':THEMES[k]?.label||k):(k==='auto'?'Auto':k.charAt(0).toUpperCase()+k.slice(1))}
+            </button>
+          ))}
+        </div>
+        {/* export/import */}
+        <p style={{fontFamily:'Cinzel',fontSize:14,color:C.textDim,letterSpacing:'0.12em',marginBottom:9}}>{t.exportData}</p>
+        <button onClick={handleExport} style={{width:'100%',padding:'11px',border:`1px solid ${C.border}`,borderRadius:8,background:C.goldFaint,display:'flex',alignItems:'center',justifyContent:'center',gap:9,cursor:'pointer',marginBottom:10}}>
+          <Ic n="download" s={21} c={C.gold}/><span style={{fontFamily:'Cinzel',fontSize:15.5,color:C.gold,letterSpacing:'0.1em'}}>{t.exportBtn}</span>
+        </button>
+        <input ref={fileRef} type="file" accept=".json" onChange={handleImport} style={{display:'none'}}/>
+        <button onClick={()=>fileRef.current.click()} style={{width:'100%',padding:'11px',border:`1px solid ${C.border}`,borderRadius:8,background:C.goldFaint,display:'flex',alignItems:'center',justifyContent:'center',gap:9,cursor:'pointer',marginBottom:4}}>
+          <Ic n="upload" s={21} c={C.gold}/><span style={{fontFamily:'Cinzel',fontSize:15.5,color:C.gold,letterSpacing:'0.1em'}}>{t.importBtn}</span>
+        </button>
+        {msg&&<p style={{fontFamily:'Cinzel',fontSize:14.5,color:C.gold,textAlign:'center',marginBottom:10,letterSpacing:'0.1em'}}>{msg}</p>}
+        <button onClick={handleReset} style={{width:'100%',padding:'11px',border:'1px solid rgba(176,80,48,0.35)',borderRadius:8,background:'transparent',fontFamily:'Cinzel',fontSize:15.5,letterSpacing:'0.1em',color:C.red,cursor:'pointer',marginTop:10}}>
+          {t.resetBtn}
+        </button>
+        {/* Support — quiet footer link */}
+        <div style={{marginTop:28,paddingTop:16,borderTop:`1px solid ${C.border}`,display:'flex',flexDirection:'column',alignItems:'center',gap:8}}>
+          <span style={{fontFamily:'Spectral, Georgia, serif',fontStyle:'italic',fontSize:13,color:C.textDim,letterSpacing:'0.04em',opacity:0.85}}>{t.support}</span>
+          <div style={{display:'flex',gap:18,alignItems:'center'}}>
+            <span onClick={()=>openExternal('https://pay.cloudtips.ru/p/6c077990')}
+                  style={{cursor:'pointer',fontFamily:'Cinzel',fontSize:12,letterSpacing:'0.18em',color:C.gold,opacity:0.7,textDecoration:'underline',textUnderlineOffset:3,textDecorationColor:'rgba(212,168,67,0.35)'}}
+                  onMouseEnter={e=>e.currentTarget.style.opacity=1}
+                  onMouseLeave={e=>e.currentTarget.style.opacity=0.7}>
+              {(t.supportTip||'Tip').toUpperCase()}
+            </span>
+            <span style={{color:C.textDim,opacity:0.4,fontSize:12}}>·</span>
+            <span onClick={()=>openExternal('https://boosty.to/jsu/donate')}
+                  style={{cursor:'pointer',fontFamily:'Cinzel',fontSize:12,letterSpacing:'0.18em',color:C.gold,opacity:0.7,textDecoration:'underline',textUnderlineOffset:3,textDecorationColor:'rgba(212,168,67,0.35)'}}
+                  onMouseEnter={e=>e.currentTarget.style.opacity=1}
+                  onMouseLeave={e=>e.currentTarget.style.opacity=0.7}>
+              BOOSTY
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ── BOTTOM NAV ────────────────────────────────────────────
+function BottomNav({tab,setTab,t,C}){
+  const tabs=[{key:'tasks',n:'tasks',l:t.tasks},{key:'habits',n:'habits',l:t.habits},{key:'chronicle',n:'chronicle',l:t.chronicle},{key:'rewards',n:'rewards',l:t.rewards},{key:'scripture',n:'scripture',l:t.scripture}];
+  const [pressed,setPressed]=useState(null);
+  return(
+    <div style={{position:'absolute',bottom:0,left:0,right:0,height:82,borderTop:`1px solid ${C.border}`,background:C.bg,display:'flex',alignItems:'flex-start',paddingTop:8}}>
+      {tabs.map(item=>{
+        const active=tab===item.key,isP=pressed===item.key;
+        return(
+          <button key={item.key} onClick={()=>setTab(item.key)} onMouseDown={()=>setPressed(item.key)} onMouseUp={()=>setPressed(null)} onTouchStart={()=>setPressed(item.key)} onTouchEnd={()=>setPressed(null)}
+            style={{flex:1,height:60,border:'none',background:'transparent',display:'flex',flexDirection:'column',alignItems:'center',justifyContent:'center',gap:5,cursor:'pointer',position:'relative',
+              transform:isP?'scale(0.88)':'scale(1)',transition:'transform 0.15s cubic-bezier(0.34,1.56,0.64,1)'}}>
+            {isP&&<div style={{position:'absolute',width:36,height:36,borderRadius:'50%',background:`radial-gradient(circle,${C.gold}22 0%,transparent 70%)`,animation:'ripple 0.4s ease-out forwards',pointerEvents:'none'}}/>}
+            <Ic n={item.n} s={active?28:23} c={active?C.gold:C.textDim}/>
+            <span style={{fontFamily:'Cinzel',fontSize:14,letterSpacing:'0.08em',color:active?C.gold:C.textDim,transition:'color 0.2s'}}>{item.l}</span>
+            {active&&<div style={{position:'absolute',bottom:-2,width:24,height:2,borderRadius:2,background:C.gold,animation:'navIndicator 0.3s cubic-bezier(0.22,1,0.36,1) both'}}/>}
+          </button>
+        );
+      })}
+    </div>
+  );
+}
+
+// ── TAURI TITLEBAR ────────────────────────────────────────
+// Custom window controls when running inside Tauri (decorations:false).
+// In a regular browser this returns null and renders nothing.
+function TauriTitleBar({C}){
+  const isTauri=typeof window!=='undefined'&&(!!window.__TAURI_INTERNALS__||!!window.__TAURI__);
+  const [maximized,setMaximized]=useState(false);
+  function getWin(){
+    try{
+      const w=window.__TAURI__?.window;
+      if(!w)return null;
+      if(typeof w.getCurrentWindow==='function')return w.getCurrentWindow();
+      if(typeof w.getCurrent==='function')return w.getCurrent();
+      if(w.WebviewWindow?.getCurrent)return w.WebviewWindow.getCurrent();
+      if(w.appWindow)return w.appWindow;
+      return null;
+    }catch{return null;}
+  }
+  async function call(method){
+    try{const w=getWin();if(w&&typeof w[method]==='function')await w[method]();}catch{}
+    if(method==='toggleMaximize'){
+      try{const w=getWin();if(w?.isMaximized)setMaximized(await w.isMaximized());}catch{}
+    }
+  }
+  useEffect(()=>{
+    if(!isTauri)return;
+    (async()=>{try{const w=getWin();if(w?.isMaximized)setMaximized(await w.isMaximized());}catch{}})();
+    function onResize(){(async()=>{try{const w=getWin();if(w?.isMaximized)setMaximized(await w.isMaximized());}catch{}})();}
+    window.addEventListener('resize',onResize);
+    return()=>window.removeEventListener('resize',onResize);
+  },[isTauri]);
+  if(!isTauri)return null;
+  return(
+    <div data-tauri-drag-region style={{
+      height:32,flexShrink:0,display:'flex',alignItems:'stretch',justifyContent:'space-between',
+      borderBottom:`1px solid ${C.border}`,background:'rgba(0,0,0,0.22)',backdropFilter:'blur(6px)',
+      WebkitBackdropFilter:'blur(6px)',position:'relative',zIndex:50,userSelect:'none',WebkitUserSelect:'none'
+    }}>
+      <div data-tauri-drag-region style={{flex:1,display:'flex',alignItems:'center',gap:8,padding:'0 14px',pointerEvents:'auto'}}>
+        <svg data-tauri-drag-region width={11} height={14} viewBox="0 0 22 28" style={{flexShrink:0,opacity:0.7,filter:`drop-shadow(0 0 3px ${C.gold}55)`}}>
+          <ellipse cx="11" cy="7" rx="4.5" ry="5.5" fill={C.gold} opacity="0.18"/>
+          <path d="M11 1C9.8 4 7.5 5.5 7.5 8.2a3.5 3.5 0 0 0 7 0C14.5 5.5 12.2 4 11 1z" fill={C.gold}/>
+          <line x1="11" y1="11.7" x2="11" y2="13.2" stroke={C.gold} strokeWidth="1.4" strokeLinecap="round"/>
+          <path d="M7 13.5C6.2 13.5 5.5 14.2 5.5 15L5.5 18.5C5.5 19.8 6.5 20.5 8 20.5L14 20.5C15.5 20.5 16.5 19.8 16.5 18.5L16.5 15C16.5 14.2 15.8 13.5 15 13.5Z" fill="none" stroke={C.gold} strokeWidth="1.25" strokeLinejoin="round"/>
+          <line x1="11" y1="20.5" x2="11" y2="23" stroke={C.gold} strokeWidth="1.4" strokeLinecap="round"/>
+        </svg>
+        <span data-tauri-drag-region style={{fontFamily:'Cinzel',fontSize:11,letterSpacing:'0.32em',color:C.goldDim}}>LUMEN</span>
+      </div>
+      <div style={{display:'flex',flexShrink:0}}>
+        <button className="tb-btn" title="Minimize" onClick={()=>call('minimize')}>
+          <svg width="11" height="11" viewBox="0 0 11 11"><line x1="1.5" y1="5.5" x2="9.5" y2="5.5" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round"/></svg>
+        </button>
+        <button className="tb-btn" title={maximized?'Restore':'Maximize'} onClick={()=>call('toggleMaximize')}>
+          {maximized?(
+            <svg width="11" height="11" viewBox="0 0 11 11">
+              <rect x="1.5" y="3.5" width="6" height="6" fill="none" stroke="currentColor" strokeWidth="1"/>
+              <path d="M3.5 3.5 L3.5 1.5 L9.5 1.5 L9.5 7.5 L7.5 7.5" fill="none" stroke="currentColor" strokeWidth="1" strokeLinejoin="round"/>
+            </svg>
+          ):(
+            <svg width="11" height="11" viewBox="0 0 11 11"><rect x="1.5" y="1.5" width="8" height="8" fill="none" stroke="currentColor" strokeWidth="1"/></svg>
+          )}
+        </button>
+        <button className="tb-btn tb-close" title="Close" onClick={()=>call('close')}>
+          <svg width="11" height="11" viewBox="0 0 11 11">
+            <line x1="2" y1="2" x2="9" y2="9" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round"/>
+            <line x1="9" y1="2" x2="2" y2="9" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  );
+}
+
+// ── APP ───────────────────────────────────────────────────
+function App(){
+  // Read storage once on mount, not on every render.
+  const [saved]=useState(()=>load());
+  const [name,setName]=useState(saved.name||'');
+  const [lang,setLang]=useState(saved.lang||'ru');
+  const t=S[lang];
+  const [themeMode,setThemeMode]=useState(saved.themeMode||'auto');
+  const C=themeMode==='auto'?THEMES[getAutoTheme()]:THEMES[themeMode]||THEMES.night;
+  const [tab,setTabRaw]=useState('tasks');
+  const [prevTab,setPrevTab]=useState('tasks');
+  function setTab(nt){setPrevTab(tab);setTabRaw(nt);}
+  const [tasks,setTasks]=useState(saved.tasks||[]);
+  const [habits,setHabits]=useState(saved.habits||[]);
+  const [coins,setCoins]=useState(saved.coins??0);
+  const [todayCoins,setTodayCoins]=useState(saved.todayCoins??0);
+  const [streak,setStreak]=useState(saved.streak??0);
+  const [lastDate,setLastDate]=useState(saved.lastDate||'');
+  const [completedCount,setCompletedCount]=useState(saved.completedCount||0);
+  const [totalFocusMin,setTotalFocusMin]=useState(saved.totalFocusMin||0);
+  const [almsCount,setAlmsCount]=useState(saved.almsCount||0);
+  const [pomoCount,setPomoCount]=useState(saved.pomoCount||0);
+  const [lectioCount,setLectioCount]=useState(saved.lectioCount||0);
+  const [sabbathCount,setSabbathCount]=useState(saved.sabbathCount||0);
+  const [themesUsed,setThemesUsed]=useState(saved.themesUsed||[]);
+  const [tasksByDay,setTasksByDay]=useState(saved.tasksByDay||{});
+  const [weeklyReflections,setWeeklyReflections]=useState(saved.weeklyReflections||[]);
+  const [lastSundayReview,setLastSundayReview]=useState(saved.lastSundayReview||'');
+  const [showSundayReview,setShowSundayReview]=useState(false);
+  const [runningTimer,setRunningTimer]=useState(null);
+  const [taskElapsed,setTaskElapsed]=useState({});
+  const [showSettings,setShowSettings]=useState(false);
+  const [showPomo,setShowPomo]=useState(false);
+  const [prayers,setPrayers]=useState(saved.prayers||[]);
+  const [prayerDate,setPrayerDate]=useState(saved.prayerDate||todayKey());
+  const [prayerText,setPrayerText]=useState(saved.prayerDate===todayKey()?(saved.prayerText||''):'');
+  const [prayerSaved,setPrayerSaved]=useState(saved.prayerDate===todayKey()?!!saved.prayerSaved:false);
+  const [taskSearch,setTaskSearch]=useState('');
+  // Tracks the current calendar day. Used to trigger the daily reset when midnight passes
+  // while the app is open (otherwise the reset only ran on mount).
+  const [currentDateKey,setCurrentDateKey]=useState(todayKey());
+  const pomoFiredRef=useRef(false);
+
+  // Detect day rollover: poll every 30s, plus listen for tab visibility / focus
+  // (so when laptop wakes or tab returns to foreground we re-check immediately).
+  useEffect(()=>{
+    const tick=()=>{const k=todayKey();if(k!==currentDateKey)setCurrentDateKey(k);};
+    const iv=setInterval(tick,30000);
+    window.addEventListener('focus',tick);
+    document.addEventListener('visibilitychange',tick);
+    return()=>{clearInterval(iv);window.removeEventListener('focus',tick);document.removeEventListener('visibilitychange',tick);};
+  },[currentDateKey]);
+
+  const maxHabitStreak=useMemo(()=>habits.length>0?habits.reduce((mx,h)=>Math.max(mx,calcHabitStreak(h.doneHistory||[])),0):0,[habits]);
+
+  // body bg
+  useEffect(()=>{document.body.style.background=C.bodyBg;},[C]);
+
+  // persist
+  useEffect(()=>{save({name,tasks,habits,coins,todayCoins,streak,lastDate,lang,themeMode,completedCount,totalFocusMin,prayers,prayerText,prayerSaved,prayerDate,almsCount,pomoCount,lectioCount,sabbathCount,themesUsed,tasksByDay,weeklyReflections,lastSundayReview});},[name,tasks,habits,coins,todayCoins,streak,lastDate,lang,themeMode,completedCount,totalFocusMin,prayers,prayerText,prayerSaved,prayerDate,almsCount,pomoCount,lectioCount,sabbathCount,themesUsed,tasksByDay,weeklyReflections,lastSundayReview]);
+
+  // track which themes have been actively used
+  useEffect(()=>{
+    const cur=themeMode==='auto'?getAutoTheme():themeMode;
+    if(['night','dawn','day','dusk'].includes(cur)&&!themesUsed.includes(cur))setThemesUsed(u=>[...u,cur]);
+  },[themeMode]);
+
+  // Daily reset — runs on mount AND whenever the calendar day changes (midnight crossing
+  // while the app stays open, or returning to a sleeping tab on a new day).
+  useEffect(()=>{
+    const today=currentDateKey;
+    if(lastDate!==today){
+      const yd=new Date();yd.setDate(yd.getDate()-1);
+      if(lastDate!==dateKey(yd)&&lastDate!=='')setStreak(0);
+      setTodayCoins(0);
+      // NOTE: do NOT advance lastDate here — that's the job of completeTask/toggleHabit
+      // when the user actually does something today. Otherwise the streak never increments.
+      // reset completed recurring tasks (keep them, just clear completion)
+      setTasks(ts=>ts.map(t=>t.recurring&&t.completed?{...t,completed:false}:t));
+    }
+    // archive yesterday's prayer if it was saved
+    if(prayerDate&&prayerDate!==today&&prayerSaved&&prayerText&&prayerText.trim()){
+      setPrayers(p=>[{date:prayerDate,text:prayerText.trim()},...(p||[])].slice(0,200));
+      setPrayerText('');setPrayerSaved(false);setPrayerDate(today);
+    }
+    // Sunday review — show once per Sunday if user has data
+    const isSunday=new Date().getDay()===0;
+    const hasData=(tasks?.length>0)||(habits?.length>0)||(completedCount>0);
+    if(isSunday&&hasData&&lastSundayReview!==today){
+      const tm=setTimeout(()=>setShowSundayReview(true),900);
+      return()=>clearTimeout(tm);
+    }
+  },[currentDateKey]);
+
+  // tauri menu integration (no-op in browser)
+  useEffect(()=>{
+    const ev=window.__TAURI__?.event;
+    if(!ev)return;
+    let unlisteners=[];
+    (async()=>{
+      try{
+        const wires=[
+          ['menu:new-task',()=>{setTab('tasks');setTimeout(()=>window.dispatchEvent(new CustomEvent('lumen:new-task')),50);}],
+          ['menu:goto',e=>setTab(e.payload)],
+          ['menu:export',()=>{const b=new Blob([exportRef.current()],{type:'application/json'});const u=URL.createObjectURL(b);const a=document.createElement('a');a.href=u;a.download='lumen-backup.json';a.click();URL.revokeObjectURL(u);}],
+          ['menu:about',()=>setShowSettings(true)],
+        ];
+        for(const [name,fn] of wires){const u=await ev.listen(name,fn);unlisteners.push(u);}
+      }catch(_){}
+    })();
+    return()=>unlisteners.forEach(u=>{try{u()}catch(_){}});
+  },[]);
+
+  // hotkeys
+  useEffect(()=>{
+    function handler(e){
+      if(['INPUT','TEXTAREA'].includes(e.target.tagName))return;
+      if((e.ctrlKey||e.metaKey)&&(e.key==='n'||e.key==='N')){e.preventDefault();setTab('tasks');setTimeout(()=>window.dispatchEvent(new CustomEvent('lumen:new-task')),50);return;}
+      if(/^[1-5]$/.test(e.key)&&!e.ctrlKey&&!e.metaKey&&!e.altKey){setTab(TAB_ORDER[parseInt(e.key)-1]);return;}
+      if(e.key==='Escape'&&showSettings){setShowSettings(false);return;}
+      if(e.key==='Escape'&&showSundayReview){setShowSundayReview(false);return;}
+    }
+    window.addEventListener('keydown',handler);
+    return()=>window.removeEventListener('keydown',handler);
+  },[showSettings,showSundayReview,tab]);
+
+  // timer
+  useEffect(()=>{
+    if(!runningTimer)return;
+    const iv=setInterval(()=>{
+      const extra=Math.floor((Date.now()-runningTimer.startedAt)/1000);
+      const total=(runningTimer.baseElapsed||0)+extra;
+      setTaskElapsed(te=>({...te,[runningTimer.taskId]:total}));
+      // pomodoro at 25 min
+      if(total>=1500&&!pomoFiredRef.current){
+        pomoFiredRef.current=true;setShowPomo(true);setPomoCount(c=>c+1);
+        // browser notification (also works inside Tauri webview)
+        try{
+          if('Notification' in window){
+            if(Notification.permission==='granted')new Notification('LUMEN · 25 минут',{body:t.pomoVerse,silent:false});
+            else if(Notification.permission!=='denied')Notification.requestPermission();
+          }
+        }catch(_){}
+      }
+    },1000);
+    return()=>clearInterval(iv);
+  },[runningTimer]);
+
+  function addTask(task){setTasks(ts=>[task,...ts]);}
+  function editTask(task){setTasks(ts=>ts.map(t=>t.id===task.id?task:t));}
+  function completeTask(id){
+    const task=tasks.find(t=>t.id===id);if(!task||task.completed)return;
+    const reward={easy:5,medium:10,hard:20}[task.difficulty];
+    setTasks(ts=>ts.map(t=>t.id===id?{...t,completed:true}:t));
+    setCoins(c=>c+reward);setTodayCoins(c=>c+reward);setCompletedCount(c=>c+1);
+    const today=todayKey();
+    setTasksByDay(d=>({...d,[today]:(d[today]||0)+1}));
+    // Claim any focus time from a running/paused timer on this task — otherwise
+    // the user would lose the focus minutes and the bonus coins.
+    const elapsedSecs=taskElapsed[id]||0;
+    if(elapsedSecs>0){
+      const mins=Math.floor(elapsedSecs/60);
+      if(mins>0){setCoins(c=>c+mins);setTodayCoins(c=>c+mins);setTotalFocusMin(m=>m+mins);}
+      setTaskElapsed(te=>{const n={...te};delete n[id];return n;});
+    }
+    if(runningTimer?.taskId===id){setRunningTimer(null);pomoFiredRef.current=false;}
+    if(lastDate!==today){setStreak(s=>s+1);setLastDate(today);}
+  }
+  function deleteTask(id){
+    setTasks(ts=>ts.filter(t=>t.id!==id));
+    if(runningTimer?.taskId===id){setRunningTimer(null);pomoFiredRef.current=false;}
+    setTaskElapsed(te=>{const n={...te};delete n[id];return n;}); // free orphan elapsed entry
+  }
+  function togglePriority(id){setTasks(ts=>ts.map(t=>t.id===id?{...t,priority:!t.priority}:t));}
+
+  function startTimer(taskId){if(runningTimer)pauseTimer(runningTimer.taskId);pomoFiredRef.current=false;setRunningTimer({taskId,startedAt:Date.now(),baseElapsed:taskElapsed[taskId]||0});}
+  function pauseTimer(taskId){if(!runningTimer||runningTimer.taskId!==taskId)return;setRunningTimer(null);}
+  function stopTimer(taskId){
+    const secs=taskElapsed[taskId]||0,mins=Math.floor(secs/60),c=mins;
+    setRunningTimer(null);setTaskElapsed(te=>{const n={...te};delete n[taskId];return n;});
+    if(c>0){setCoins(co=>co+c);setTodayCoins(co=>co+c);}
+    if(mins>0)setTotalFocusMin(m=>m+mins);
+    pomoFiredRef.current=false;return c;
+  }
+
+  function toggleHabit(id){
+    const today=todayKey();
+    setHabits(hs=>hs.map(h=>{
+      if(h.id!==id)return h;
+      const done=h.doneHistory||[];
+      if(done.includes(today))return{...h,doneHistory:done.filter(d=>d!==today)};
+      const ns=calcHabitStreak(done)+1;
+      const bonus=ns%7===0?10:ns%3===0?5:1;
+      setCoins(c=>c+bonus);setTodayCoins(c=>c+bonus);
+      return{...h,doneHistory:[...done,today]};
+    }));
+    const today2=todayKey();if(lastDate!==today2){setStreak(s=>s+1);setLastDate(today2);}
+  }
+  function editHabit(h){setHabits(hs=>hs.some(x=>x.id===h.id)?hs.map(x=>x.id===h.id?h:x):[...hs,h]);}
+
+  function spendCoins(n,reward){
+    setCoins(c=>Math.max(0,c-n));
+    if(reward&&reward.cat==='alms')setAlmsCount(a=>a+1);
+    if(reward&&reward.id===16)setSabbathCount(s=>s+1);
+  }
+  function getExportData(){return JSON.stringify({_v:1,_exportedAt:new Date().toISOString(),name,tasks,habits,coins,todayCoins,streak,lastDate,lang,themeMode,completedCount,totalFocusMin,prayers,almsCount,pomoCount,lectioCount,sabbathCount,themesUsed,tasksByDay,weeklyReflections,lastSundayReview},null,2);}
+  // Keep a live ref so long-lived listeners (Tauri menu) call the current closure,
+  // not the stale one captured when the effect first ran.
+  const exportRef=useRef(getExportData);exportRef.current=getExportData;
+  function handleImport(data){
+    if(data.tasks)setTasks(data.tasks);if(data.habits)setHabits(data.habits);
+    if(data.coins!=null)setCoins(data.coins);if(data.streak!=null)setStreak(data.streak);
+    if(data.todayCoins!=null)setTodayCoins(data.todayCoins);
+    if(data.lastDate)setLastDate(data.lastDate);
+    if(data.name)setName(data.name);if(data.lang)setLang(data.lang);
+    if(data.themeMode)setThemeMode(data.themeMode);
+    if(data.completedCount!=null)setCompletedCount(data.completedCount);
+    if(data.totalFocusMin!=null)setTotalFocusMin(data.totalFocusMin);
+    if(data.prayers)setPrayers(data.prayers);
+    if(data.almsCount!=null)setAlmsCount(data.almsCount);
+    if(data.pomoCount!=null)setPomoCount(data.pomoCount);
+    if(data.lectioCount!=null)setLectioCount(data.lectioCount);
+    if(data.sabbathCount!=null)setSabbathCount(data.sabbathCount);
+    if(data.themesUsed)setThemesUsed(data.themesUsed);
+    if(data.tasksByDay)setTasksByDay(data.tasksByDay);
+    if(data.weeklyReflections)setWeeklyReflections(data.weeklyReflections);
+    if(data.lastSundayReview)setLastSundayReview(data.lastSundayReview);
+    setShowSettings(false);
+  }
+  function handleReset(){setTasks([]);setHabits([]);setCoins(0);setTodayCoins(0);setStreak(0);setLastDate('');setName('');setPrayers([]);setPrayerText('');setPrayerSaved(false);setAlmsCount(0);setPomoCount(0);setLectioCount(0);setSabbathCount(0);setThemesUsed([]);setCompletedCount(0);setTotalFocusMin(0);setTasksByDay({});setWeeklyReflections([]);setLastSundayReview('');setShowSettings(false);}
+
+  // Stable daily verse: epoch-day index cycles through ALL verses, one new each calendar day.
+  const verse=VERSES[Math.floor(Date.now()/86400000)%VERSES.length];
+  const rank=getRank(coins);
+
+  // Onboarding lives inside the centered shell so the Tauri titlebar
+  // (when present) stays visible above it.
+  if(!name) return (
+    <div style={{width:'100%',height:'100%',background:C.bg,display:'flex',flexDirection:'column',transition:'background 0.8s ease'}}>
+      <TauriTitleBar C={C}/>
+      <div className="app-shell" style={{background:C.bg,color:C.text}}>
+        <Onboarding onDone={n=>setName(n)} C={C}/>
+      </div>
+    </div>
+  );
+
+  return(
+    <div style={{width:'100%',height:'100%',background:C.bg,display:'flex',flexDirection:'column',transition:'background 0.8s ease'}}>
+      <TauriTitleBar C={C}/>
+      <div className="app-shell" style={{background:C.bg,color:C.text}}>
+      {/* header */}
+      <div style={{padding:'18px 18px 6px',display:'flex',alignItems:'center',justifyContent:'space-between',flexShrink:0}}>
+        <div style={{display:'flex',alignItems:'center',gap:9}}>
+          <svg width={20} height={26} viewBox="0 0 22 28" style={{flexShrink:0,filter:`drop-shadow(0 0 5px ${C.gold}66)`,animation:'flicker 4.5s ease-in-out infinite'}}>
+            <ellipse cx="11" cy="7" rx="4.5" ry="5.5" fill={C.gold} opacity="0.12"/>
+            <path d="M11 1C9.8 4 7.5 5.5 7.5 8.2a3.5 3.5 0 0 0 7 0C14.5 5.5 12.2 4 11 1z" fill={C.gold} style={{transformOrigin:'11px 10px',animation:'flameDance 2.8s ease-in-out infinite'}}/>
+            <path d="M11 4.5C10.4 6.2 9.2 7.2 9.2 8.4a1.8 1.8 0 0 0 3.6 0C12.8 7.2 11.6 6.2 11 4.5z" fill="#fde68a" opacity="0.75" style={{transformOrigin:'11px 10px',animation:'flameDance 2.8s ease-in-out infinite'}}/>
+            <line x1="11" y1="11.7" x2="11" y2="13.2" stroke={C.gold} strokeWidth="1.4" strokeLinecap="round"/>
+            <path d="M7 13.5C6.2 13.5 5.5 14.2 5.5 15L5.5 18.5C5.5 19.8 6.5 20.5 8 20.5L14 20.5C15.5 20.5 16.5 19.8 16.5 18.5L16.5 15C16.5 14.2 15.8 13.5 15 13.5Z" fill="none" stroke={C.gold} strokeWidth="1.25" strokeLinejoin="round"/>
+            <path d="M15.5 14.5L19 13" stroke={C.gold} strokeWidth="1.2" strokeLinecap="round"/>
+            <path d="M6.5 15.5C4.5 15.5 3.5 16.5 3.5 17.5C3.5 18.8 4.8 19.5 6 19.5" stroke={C.gold} strokeWidth="1.1" strokeLinecap="round" fill="none"/>
+            <line x1="11" y1="20.5" x2="11" y2="23" stroke={C.gold} strokeWidth="1.4" strokeLinecap="round"/>
+            <path d="M7 23Q6.5 24.5 7.5 25L14.5 25Q15.5 24.5 15 23Z" fill="none" stroke={C.gold} strokeWidth="1.2" strokeLinejoin="round"/>
+          </svg>
+          <div>
+            <div style={{display:'flex',alignItems:'baseline',gap:8}}>
+              <span style={{fontFamily:'Cinzel',fontSize:22,letterSpacing:'0.18em',color:C.text}}>LUMEN</span>
+              <span style={{fontFamily:'Cinzel',fontSize:14,color:C.goldDim,letterSpacing:'0.1em'}}>{rank.icon} {lang==='ru'?rank.title:rank.titleEn}</span>
+            </div>
+            <span style={{fontFamily:'Spectral',fontStyle:'italic',fontSize:13.5,color:C.textMid,letterSpacing:'0.02em'}}>{name?`${name} · `:''}{fmtDateLong(lang)}</span>
+          </div>
+        </div>
+        <div onClick={()=>setShowSettings(true)} className="gear-hover" style={{cursor:'pointer',opacity:0.5,padding:4}}><Ic n="gear" s={25} c={C.textMid}/></div>
+      </div>
+      <StatBar streak={streak} todayCoins={todayCoins} coins={coins} t={t} C={C} name={name} lang={lang}/>
+      {/* active timer banner */}
+      {runningTimer&&(()=>{
+        const task=tasks.find(tk=>tk.id===runningTimer.taskId);
+        const secs=taskElapsed[runningTimer.taskId]||0,isPomo=secs>=1500&&secs<1560;
+        return(<div style={{margin:'8px 16px 0',border:`1px solid ${isPomo?C.gold:C.border}`,borderRadius:7,padding:'7px 12px',display:'flex',alignItems:'center',gap:9,background:isPomo?`${C.gold}12`:`${C.gold}05`,flexShrink:0,animation:'fadeIn 0.3s ease'}}>
+          <div style={{width:7,height:7,borderRadius:'50%',background:C.gold,animation:'glowPulse 1.4s infinite',boxShadow:`0 0 6px ${C.gold}`,flexShrink:0}}/>
+          <span style={{fontFamily:'Cinzel',fontSize:15,color:C.gold,letterSpacing:'0.1em',flexShrink:0}}>{fmtTime(secs)}</span>
+          <span style={{fontFamily:'Inter',fontSize:17,color:C.textMid,flex:1,overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'}}>{task?.title}</span>
+          {isPomo&&<span style={{fontFamily:'Cinzel',fontSize:14,color:C.gold,letterSpacing:'0.08em',flexShrink:0}}>🕯 ПОМОДОРО</span>}
+        </div>);
+      })()}
+      <div style={{flex:1,overflow:'hidden',display:'flex',flexDirection:'column'}}>
+        <TabScreen tabKey={tab} prevTab={prevTab}>
+          {tab==='tasks'&&<TasksTab tasks={tasks} verse={verse} onAdd={addTask} onEdit={editTask} onComplete={completeTask} onDelete={deleteTask} onTogglePriority={togglePriority} onMove={()=>{}} runningTimer={runningTimer} taskElapsed={taskElapsed} onTimerStart={startTimer} onTimerPause={pauseTimer} onTimerStop={stopTimer} t={t} C={C} lang={lang} showPomo={showPomo} onClosePomo={()=>setShowPomo(false)} taskSearch={taskSearch} setTaskSearch={setTaskSearch}/>}
+          {tab==='habits'&&<HabitsTab habits={habits} onToggle={toggleHabit} onAdd={h=>editHabit(h)} onEdit={editHabit} t={t} lang={lang} C={C}/>}
+          {tab==='chronicle'&&<ChronicleTab tasks={tasks} habits={habits} streak={streak} coins={coins} lang={lang} t={t} completedCount={completedCount} maxHabitStreak={maxHabitStreak} totalFocusMin={totalFocusMin} prayers={prayers} almsCount={almsCount} pomoCount={pomoCount} lectioCount={lectioCount} sabbathCount={sabbathCount} themesUsed={themesUsed} tasksByDay={tasksByDay} C={C}/>}
+          {tab==='rewards'&&<RewardsTab coins={coins} onSpend={spendCoins} lang={lang} t={t} C={C}/>}
+          {tab==='scripture'&&<ScriptureTab t={t} C={C} lang={lang} prayerText={prayerText} prayerSaved={prayerSaved} prayers={prayers} setPrayers={setPrayers} onPrayerChange={setPrayerText} onPrayerSave={()=>{if(!prayerText.trim())return;setPrayerSaved(true);setPrayerDate(todayKey());}} onPrayerClear={()=>{setPrayerText('');setPrayerSaved(false);}} onLectioComplete={()=>setLectioCount(c=>c+1)}/>}
+        </TabScreen>
+      </div>
+      <BottomNav tab={tab} setTab={setTab} t={t} C={C}/>
+      {showSettings&&<SettingsOverlay onClose={()=>setShowSettings(false)} lang={lang} setLang={setLang} getExportData={getExportData} onImport={handleImport} onReset={handleReset} themeMode={themeMode} setThemeMode={setThemeMode} t={t} C={C}/>}
+      {showSundayReview&&<SundayReview onClose={(markSeen)=>{setShowSundayReview(false);if(markSeen)setLastSundayReview(todayKey());}} onSave={(entry)=>{setWeeklyReflections(r=>[...r,entry].slice(-52));setLastSundayReview(todayKey());}} t={t} C={C} lang={lang} tasksByDay={tasksByDay} habits={habits} prayers={prayers} coins={coins} todayCoins={todayCoins} streak={streak} totalFocusMin={totalFocusMin} weeklyReflections={weeklyReflections}/>}
+      </div>
+    </div>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
+
+// PWA service worker registration (browser only, not Tauri)
+if ('serviceWorker' in navigator && !window.__TAURI_INTERNALS__) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('sw.js').catch(() => {});
+  });
+}
+</script>
+</body>
+</html>
