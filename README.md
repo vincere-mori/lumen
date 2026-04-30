@@ -2,8 +2,8 @@
 
 A personal discipline tracker built on faith, habit, and scripture.
 
-[![Releases](https://img.shields.io/github/v/release/BladeStranger04/lumen-dist?style=flat-square&color=c9a227&label=Download)](https://github.com/BladeStranger04/lumen-dist/releases/latest)
-[![Live Demo](https://img.shields.io/badge/Live%20Demo-GitHub%20Pages-c9a227?style=flat-square&logo=github)](https://bladestranger04.github.io/lumen-dist)
+[![Releases](https://img.shields.io/github/v/release/vincere-mori/lumen-dist?style=flat-square&color=c9a227&label=Download)](https://github.com/vincere-mori/lumen-dist/releases/latest)
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-GitHub%20Pages-c9a227?style=flat-square&logo=github)](https://vincere-mori.github.io/lumen-dist)
 [![License](https://img.shields.io/badge/License-MIT-5a4e38?style=flat-square)](#license)
 
 > [Русская версия ниже](#русская-версия)
@@ -16,7 +16,7 @@ LUMEN is a habit and task tracker built for people who want a quiet, intentional
 
 ## Download
 
-**Desktop** — Windows, macOS, Linux. Grab an installer from [Releases](https://github.com/BladeStranger04/lumen-dist/releases/latest):
+**Desktop** — Windows, macOS, Linux. Grab an installer from [Releases](https://github.com/vincere-mori/lumen-dist/releases/latest):
 
 | Platform | File |
 |----------|------|
@@ -26,7 +26,7 @@ LUMEN is a habit and task tracker built for people who want a quiet, intentional
 
 Install it like any other app. Works fully offline after the first launch.
 
-**Web / PWA** — open [bladestranger04.github.io/lumen-dist](https://bladestranger04.github.io/lumen-dist) in any modern browser. Chrome and Edge will offer to install it as an app — once installed, it runs in its own window and works offline.
+**Web / PWA** — open [vincere-mori.github.io/lumen-dist](https://vincere-mori.github.io/lumen-dist) in any modern browser. Chrome and Edge will offer to install it as an app — once installed, it runs in its own window and works offline.
 
 ## What's inside
 
@@ -60,9 +60,9 @@ LUMEN — десктоп-трекер дел, привычек и духовно
 
 ### Скачать
 
-Установщики под Windows / macOS / Linux в разделе [Releases](https://github.com/BladeStranger04/lumen-dist/releases/latest).
+Установщики под Windows / macOS / Linux в разделе [Releases](https://github.com/vincere-mori/lumen-dist/releases/latest).
 
-Веб-версия: [bladestranger04.github.io/lumen-dist](https://bladestranger04.github.io/lumen-dist) — открой в Chrome/Edge, можно установить как PWA и пользоваться офлайн.
+Веб-версия: [vincere-mori.github.io/lumen-dist](https://vincere-mori.github.io/lumen-dist) — открой в Chrome/Edge, можно установить как PWA и пользоваться офлайн.
 
 ### Что внутри
 
