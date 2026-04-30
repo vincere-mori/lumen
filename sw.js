@@ -2,7 +2,7 @@
 // Strategy:
 //   * HTML / navigation → network-first (so updates ship instantly)
 //   * Static assets (JS, CSS, fonts, images) → cache-first w/ background revalidate
-const CACHE = 'lumen-v6';
+const CACHE = 'lumen-v7';
 const ASSETS = [
   './',
   './index.html',

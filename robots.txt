@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://vincere-mori.github.io/lumen-dist/sitemap.xml
