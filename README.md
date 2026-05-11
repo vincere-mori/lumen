@@ -1,4 +1,4 @@
-# LUMEN
+﻿# LUMEN
 
 A personal discipline tracker built on faith, habit, and scripture.
 
@@ -16,13 +16,16 @@ LUMEN is a habit and task tracker built for people who want a quiet, intentional
 
 ## Download
 
-**Desktop** — Windows, macOS, Linux. Grab an installer from [Releases](https://github.com/vincere-mori/lumen-dist/releases/latest):
+Grab the current release from [Releases](https://github.com/vincere-mori/lumen-dist/releases/latest):
 
 | Platform | File |
 |----------|------|
 | Windows  | `.msi` or `.exe` |
 | macOS    | `.dmg` (universal) |
 | Linux    | `.AppImage`, `.deb`, `.rpm` |
+| Android  | `.apk` |
+
+Latest Android build: [`LUMEN-v1.0.9-android.apk`](https://github.com/vincere-mori/lumen-dist/releases/download/v1.0.9/LUMEN-v1.0.9-android.apk).
 
 Install it like any other app. Works fully offline after the first launch.
 
@@ -36,6 +39,7 @@ Install it like any other app. Works fully offline after the first launch.
 - **Rewards** — spend earned coins on rest, joy, almsgiving, or a Sabbath day
 - **Scripture** — verse of the day, Lectio Divina (4 stages of meditation), prayer journal that resets every night
 - **Sunday Review** — once a week, look back
+- **Themes** — time-of-day palettes plus Snow Skete, Byzantine Cinnabar, and Olive Vigil
 
 Dark, candlelit aesthetic. Cinzel & Spectral typography. Built to feel like a missal, not an app.
 
@@ -56,11 +60,20 @@ MIT — see release notes. Source code is kept in a private repository; binaries
 
 ## Русская версия
 
-LUMEN — десктоп-трекер дел, привычек и духовной дисциплины. Никаких аккаунтов и серверов: все данные хранятся локально, приложение работает офлайн.
+LUMEN — трекер дел, привычек и духовной дисциплины. Никаких аккаунтов и серверов: все данные хранятся локально, приложение работает офлайн.
 
 ### Скачать
 
-Установщики под Windows / macOS / Linux в разделе [Releases](https://github.com/vincere-mori/lumen-dist/releases/latest).
+Актуальные сборки лежат в [Releases](https://github.com/vincere-mori/lumen-dist/releases/latest):
+
+| Платформа | Файл |
+|-----------|------|
+| Windows   | `.msi` или `.exe` |
+| macOS     | `.dmg` universal |
+| Linux     | `.AppImage`, `.deb`, `.rpm` |
+| Android   | `.apk` |
+
+Последний Android APK: [`LUMEN-v1.0.9-android.apk`](https://github.com/vincere-mori/lumen-dist/releases/download/v1.0.9/LUMEN-v1.0.9-android.apk).
 
 Веб-версия: [vincere-mori.github.io/lumen-dist](https://vincere-mori.github.io/lumen-dist) — открой в Chrome/Edge, можно установить как PWA и пользоваться офлайн.
 
@@ -72,6 +85,7 @@ LUMEN — десктоп-трекер дел, привычек и духовно
 - **Обеты** — обмен накопленных монет на отдых, радость, милостыню, Субботу
 - **Писание** — стих дня, Lectio Divina, молитвенный журнал, очищающийся каждую ночь
 - **Воскресный обзор** — еженедельная остановка и взгляд назад
+- **Темы** — палитры по времени суток, плюс «Снежный скит», «Византийская киноварь» и «Оливковая всенощная»
 
 Тёмная палитра, готическое золото, шрифт Cinzel. Задумано ближе к келье, чем к ленте.
 
