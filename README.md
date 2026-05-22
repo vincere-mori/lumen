@@ -1,15 +1,15 @@
 <div align="center">
-  <img src="https://raw.githubusercontent.com/vincere-mori/lumen-dist/gh-pages/icons/icon-512.png" alt="Lumen app icon" width="140" />
+  <img src="https://raw.githubusercontent.com/vincere-mori/lumen/gh-pages/icons/icon-512.png" alt="Lumen app icon" width="140" />
 
   <h1>Lumen</h1>
 
   <p><em>трекер дел, привычек и духовной дисциплины</em></p>
 
   <p>
-    <a href="https://vincere-mori.github.io/lumen-dist/">
+    <a href="https://vincere-mori.github.io/lumen/">
       <img src="https://img.shields.io/badge/open%20app-c9a227?style=for-the-badge&logo=githubpages&logoColor=white" alt="open app" />
     </a>
-    <a href="https://github.com/vincere-mori/lumen-dist/releases/latest">
+    <a href="https://github.com/vincere-mori/lumen/releases/latest">
       <img src="https://img.shields.io/badge/download-181717?style=for-the-badge&logo=github&logoColor=white" alt="download" />
     </a>
   </p>
@@ -25,7 +25,7 @@ Lumen — трекер дел, привычек и духовной дисцип
 
 ## Скачать
 
-Актуальные сборки в [Releases](https://github.com/vincere-mori/lumen-dist/releases/latest).
+Актуальные сборки в [Releases](https://github.com/vincere-mori/lumen/releases/latest).
 
 Какой файл выбрать:
 
@@ -34,7 +34,7 @@ Lumen — трекер дел, привычек и духовной дисцип
 - Linux: `.AppImage`, `.deb` или `.rpm`
 - Android: `.apk`
 
-Веб-версия: [vincere-mori.github.io/lumen-dist](https://vincere-mori.github.io/lumen-dist/)
+Веб-версия: [vincere-mori.github.io/lumen](https://vincere-mori.github.io/lumen/)
 
 ## Что внутри
 
@@ -56,14 +56,14 @@ No accounts, no ads, no syncing. Everything stays on your device.
 
 ## Downloads
 
-Latest release — [Releases](https://github.com/vincere-mori/lumen-dist/releases/latest):
+Latest release — [Releases](https://github.com/vincere-mori/lumen/releases/latest):
 
 - Windows: `.exe` or `.msi`
 - macOS: `.dmg` (universal)
 - Linux: `.AppImage`, `.deb`, `.rpm`
 - Android: `.apk`
 
-Web version: [vincere-mori.github.io/lumen-dist](https://vincere-mori.github.io/lumen-dist/)
+Web version: [vincere-mori.github.io/lumen](https://vincere-mori.github.io/lumen/)
 
 ## Features
 
