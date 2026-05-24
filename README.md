@@ -13,6 +13,10 @@
       <img src="https://img.shields.io/badge/download-181717?style=for-the-badge&logo=github&logoColor=white" alt="download" />
     </a>
   </p>
+
+  <p>
+    <a href="#english-version">English version</a>
+  </p>
 </div>
 
 ---
@@ -22,6 +26,38 @@
 Lumen — трекер дел, привычек и духовной дисциплины.
 
 Никаких аккаунтов, серверов, рекламы. Все данные хранятся локально. Открой, отметь, прочти стих, двигайся дальше.
+
+### Интерфейс
+
+<p align="center">
+  <strong>Экран загрузки</strong><br />
+  <img src="./screenshot_loading.png" alt="Экран загрузки" width="480" />
+</p>
+
+<p align="center">
+  <strong>Вкладка «Дела»</strong><br />
+  <img src="./screenshot_tasks.png" alt="Вкладка Дела" width="480" />
+</p>
+
+<p align="center">
+  <strong>Вкладка «Привычки»</strong><br />
+  <img src="./screenshot_habits.png" alt="Вкладка Привычки" width="480" />
+</p>
+
+<p align="center">
+  <strong>Вкладка «Хроники» (Статистика)</strong><br />
+  <img src="./screenshot_stats.png" alt="Вкладка Хроники" width="480" />
+</p>
+
+<p align="center">
+  <strong>Вкладка «Обеты» (Награды)</strong><br />
+  <img src="./screenshot_rewards.png" alt="Вкладка Обеты" width="480" />
+</p>
+
+<p align="center">
+  <strong>Вкладка «Писание»</strong><br />
+  <img src="./screenshot_scripture.png" alt="Вкладка Писание" width="480" />
+</p>
 
 ## Скачать
 
@@ -53,6 +89,38 @@ Lumen — трекер дел, привычек и духовной дисцип
 Lumen is a habit and task tracker built around faith, discipline, and daily scripture.
 
 No accounts, no ads, no syncing. Everything stays on your device.
+
+### Interface
+
+<p align="center">
+  <strong>Loading Screen</strong><br />
+  <img src="./screenshot_loading.png" alt="Loading Screen" width="480" />
+</p>
+
+<p align="center">
+  <strong>Tasks Tab</strong><br />
+  <img src="./screenshot_tasks.png" alt="Tasks Tab" width="480" />
+</p>
+
+<p align="center">
+  <strong>Habits Tab</strong><br />
+  <img src="./screenshot_habits.png" alt="Habits Tab" width="480" />
+</p>
+
+<p align="center">
+  <strong>Stats/Chronicle Tab</strong><br />
+  <img src="./screenshot_stats.png" alt="Stats Tab" width="480" />
+</p>
+
+<p align="center">
+  <strong>Rewards/Vows Tab</strong><br />
+  <img src="./screenshot_rewards.png" alt="Rewards Tab" width="480" />
+</p>
+
+<p align="center">
+  <strong>Scripture Tab</strong><br />
+  <img src="./screenshot_scripture.png" alt="Scripture Tab" width="480" />
+</p>
 
 ## Downloads
 
