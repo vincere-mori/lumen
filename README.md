@@ -21,9 +21,7 @@
 </div>
 
 <p align="center">
-  <img src="./screenshots/screenshot_tasks.png" alt="Lumen tasks" width="31%" />
-  <img src="./screenshots/screenshot_habits.png" alt="Lumen habits" width="31%" />
-  <img src="./screenshots/screenshot_scripture.png" alt="Lumen scripture" width="31%" />
+  <img src="./screenshots/screenshot_tasks.png" alt="Lumen main screen" width="760" />
 </p>
 
 ## Download
@@ -52,12 +50,6 @@ Lumen помогает держать день в порядке без акка
 - Писание: стих дня, Lectio Divina, молитвенный журнал
 - воскресный обзор недели
 - темные темы по времени суток
-
-<p align="center">
-  <img src="./screenshots/screenshot_stats.png" alt="Lumen stats" width="31%" />
-  <img src="./screenshots/screenshot_rewards.png" alt="Lumen rewards" width="31%" />
-  <img src="./screenshots/screenshot_loading.png" alt="Lumen loading" width="31%" />
-</p>
 
 <a id="english-version"></a>
 
