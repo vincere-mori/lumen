@@ -21,7 +21,7 @@
 </div>
 
 <p align="center">
-  <img src="./screenshots/screenshot_tasks.png" alt="Lumen main screen" width="620" />
+  <img src="./screenshots/screenshot_store.png" alt="Lumen — tasks, habits, focus and scripture" width="320" />
 </p>
 
 ## Download
