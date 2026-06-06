@@ -28,10 +28,10 @@
 
 | Platform | Build |
 | --- | --- |
-| Windows | [Setup .exe](https://github.com/vincere-mori/lumen/releases/download/v1.1.1/Lumen_1.1.1_x64-setup.exe) / [MSI](https://github.com/vincere-mori/lumen/releases/download/v1.1.1/Lumen_1.1.1_x64_en-US.msi) |
-| macOS | [DMG](https://github.com/vincere-mori/lumen/releases/download/v1.1.1/Lumen_1.1.1_universal.dmg) |
-| Linux | [AppImage](https://github.com/vincere-mori/lumen/releases/download/v1.1.1/Lumen_1.1.1_amd64.AppImage) / [DEB](https://github.com/vincere-mori/lumen/releases/download/v1.1.1/Lumen_1.1.1_amd64.deb) / [RPM](https://github.com/vincere-mori/lumen/releases/download/v1.1.1/Lumen-1.1.1-1.x86_64.rpm) |
-| Android | [APK](https://github.com/vincere-mori/lumen/releases/download/v1.1.1/LUMEN-v1.1.1-android.apk) |
+| Windows | [Setup .exe](https://github.com/vincere-mori/lumen/releases/download/v1.1.2/Lumen_1.1.2_x64-setup.exe) / [MSI](https://github.com/vincere-mori/lumen/releases/download/v1.1.2/Lumen_1.1.2_x64_en-US.msi) |
+| macOS | [DMG](https://github.com/vincere-mori/lumen/releases/download/v1.1.2/Lumen_1.1.2_universal.dmg) |
+| Linux | [AppImage](https://github.com/vincere-mori/lumen/releases/download/v1.1.2/Lumen_1.1.2_amd64.AppImage) / [DEB](https://github.com/vincere-mori/lumen/releases/download/v1.1.2/Lumen_1.1.2_amd64.deb) / [RPM](https://github.com/vincere-mori/lumen/releases/download/v1.1.2/Lumen-1.1.2-1.x86_64.rpm) |
+| Android | [APK](https://github.com/vincere-mori/lumen/releases/download/v1.1.2/LUMEN-v1.1.2-android.apk) |
 
 Web version: [vincere-mori.github.io/lumen](https://vincere-mori.github.io/lumen/)
 
@@ -65,10 +65,10 @@ No accounts, no ads, no cloud sync. Your data stays on your device.
 
 | Platform | Build |
 | --- | --- |
-| Windows | [Setup .exe](https://github.com/vincere-mori/lumen/releases/download/v1.1.1/Lumen_1.1.1_x64-setup.exe) / [MSI](https://github.com/vincere-mori/lumen/releases/download/v1.1.1/Lumen_1.1.1_x64_en-US.msi) |
-| macOS | [DMG](https://github.com/vincere-mori/lumen/releases/download/v1.1.1/Lumen_1.1.1_universal.dmg) |
-| Linux | [AppImage](https://github.com/vincere-mori/lumen/releases/download/v1.1.1/Lumen_1.1.1_amd64.AppImage) / [DEB](https://github.com/vincere-mori/lumen/releases/download/v1.1.1/Lumen_1.1.1_amd64.deb) / [RPM](https://github.com/vincere-mori/lumen/releases/download/v1.1.1/Lumen-1.1.1-1.x86_64.rpm) |
-| Android | [APK](https://github.com/vincere-mori/lumen/releases/download/v1.1.1/LUMEN-v1.1.1-android.apk) |
+| Windows | [Setup .exe](https://github.com/vincere-mori/lumen/releases/download/v1.1.2/Lumen_1.1.2_x64-setup.exe) / [MSI](https://github.com/vincere-mori/lumen/releases/download/v1.1.2/Lumen_1.1.2_x64_en-US.msi) |
+| macOS | [DMG](https://github.com/vincere-mori/lumen/releases/download/v1.1.2/Lumen_1.1.2_universal.dmg) |
+| Linux | [AppImage](https://github.com/vincere-mori/lumen/releases/download/v1.1.2/Lumen_1.1.2_amd64.AppImage) / [DEB](https://github.com/vincere-mori/lumen/releases/download/v1.1.2/Lumen_1.1.2_amd64.deb) / [RPM](https://github.com/vincere-mori/lumen/releases/download/v1.1.2/Lumen-1.1.2-1.x86_64.rpm) |
+| Android | [APK](https://github.com/vincere-mori/lumen/releases/download/v1.1.2/LUMEN-v1.1.2-android.apk) |
 
 Web app: [vincere-mori.github.io/lumen](https://vincere-mori.github.io/lumen/)
 
